@@ -33,7 +33,7 @@ namespace GitEdit.View
         {
             switch (file.Name)
             {
-                case "COMMIT_MESSAGE":
+                case "COMMIT_EDITMSG":
                     return HighlightingManager.Instance.GetDefinition(Constant.CommitMessageSyntaxName);
                 default:
                     return HighlightingManager.Instance.GetDefinitionByExtension(file.Extension);
