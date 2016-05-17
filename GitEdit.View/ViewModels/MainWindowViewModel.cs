@@ -37,6 +37,16 @@ namespace GitEdit.View.Model
             get { return _view.Editor; }
         }
 
+        public string FontFamily
+        {
+            get { return Properties.Settings.Default.FontFamily; }
+        }
+
+        public int FontSize
+        {
+            get { return Properties.Settings.Default.FontSize; }
+        }
+
         public string Title
         {
             get
