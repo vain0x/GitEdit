@@ -37,6 +37,13 @@ namespace GitEdit.View.Model
             get { return _view.Editor; }
         }
 
+        private Rect _rect = Properties.Settings.Default.MainWindowRect;
+        public Rect Rect
+        {
+            get { return _rect; }
+            set { SetProperty(ref _rect, value); }
+        }
+
         public string FontFamily
         {
             get { return Properties.Settings.Default.FontFamily; }

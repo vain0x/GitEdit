@@ -8,5 +8,8 @@
     <Setting Name="FontSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">16</Value>
     </Setting>
+    <Setting Name="MainWindowRect" Type="System.Windows.Rect" Scope="User">
+      <Value Profile="(Default)">10,10,640,640</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

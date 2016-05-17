@@ -46,5 +46,17 @@ namespace GitEdit.View.Properties {
                 this["FontSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10,10,640,640")]
+        public global::System.Windows.Rect MainWindowRect {
+            get {
+                return ((global::System.Windows.Rect)(this["MainWindowRect"]));
+            }
+            set {
+                this["MainWindowRect"] = value;
+            }
+        }
     }
 }

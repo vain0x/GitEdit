@@ -100,5 +100,12 @@ namespace GitEdit.View
                 }
             }
         }
+
+        private void _mainWindow_Closed(object sender, EventArgs e)
+        {
+            var settings = Properties.Settings.Default;
+            settings.MainWindowRect = new Rect(Left, Top, Width, Height);
+            settings.Save();
+        }
     }
 }
