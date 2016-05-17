@@ -2,8 +2,7 @@
 Simple text editor for Git.
 
 ## Features
-- Syntax highlighting for `COMMIT_MESSAGE` containing diff.
-  - We recommend to use ``git commit -v``.
+- Syntax highlighting for `COMMIT_EDITMSG` containing diff (``git commit -v``).
 - ``Ctrl+Q`` to save and exit.
 
 ## Libraries

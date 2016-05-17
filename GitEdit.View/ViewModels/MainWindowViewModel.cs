@@ -37,6 +37,23 @@ namespace GitEdit.View.Model
             get { return _view.Editor; }
         }
 
+        private Rect _rect = Properties.Settings.Default.MainWindowRect;
+        public Rect Rect
+        {
+            get { return _rect; }
+            set { SetProperty(ref _rect, value); }
+        }
+
+        public string FontFamily
+        {
+            get { return Properties.Settings.Default.FontFamily; }
+        }
+
+        public int FontSize
+        {
+            get { return Properties.Settings.Default.FontSize; }
+        }
+
         public string Title
         {
             get
@@ -53,9 +70,28 @@ namespace GitEdit.View.Model
             }
         }
 
+        public string SyntaxName
+        {
+            get { return Editor.SyntaxHighlighting.Name; }
+        }
+
+        public string EncodingName
+        {
+            get { return Editor.Encoding.EncodingName; }
+        }
+
+        private void UpdateStatusBar()
+        {
+            foreach (var name in new string[] { "SyntaxName", "EncodingName" })
+            {
+                NotifyPropertyChanged(name);
+            }
+        }
+
         public void OpenFile(FileInfo file)
         {
             Editor.LoadFile(file);
+            UpdateStatusBar();
         }
 
         public void SaveFile(FileInfo file)

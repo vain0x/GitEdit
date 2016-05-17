@@ -6,7 +6,13 @@
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:view="clr-namespace:GitEdit.View"
     Title="{Binding Title}"
-    Width="512" Height="640"
+    Left="{Binding Rect.Left}"
+    Top="{Binding Rect.Top}"
+    Width="{Binding Rect.Width}"
+    Height="{Binding Rect.Height}"
+    AllowDrop="True"
+    Drop="_mainWindow_Drop"
+    Closed="_mainWindow_Closed"
     >
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -28,8 +34,17 @@
             <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <view:MyTextEditor x:Name="_editor" />
+        <view:MyTextEditor
+            x:Name="_editor"
+            Margin="5"
+            FontFamily="{Binding FontFamily}"
+            FontSize="{Binding FontSize}"
+            />
         <Grid Grid.Row="1">
+            <StatusBar>
+                <StatusBarItem Content="{Binding SyntaxName}" />
+                <StatusBarItem Content="{Binding EncodingName}" />
+            </StatusBar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Clear" Command="{Binding ClearQuitCommand}" />
                 <Button Content="Save &amp; Quit" Command="{Binding SaveQuitCommand}" ToolTip="Ctrl+Q" />
