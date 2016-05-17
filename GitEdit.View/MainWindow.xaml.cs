@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -75,6 +76,29 @@ namespace GitEdit.View
         private void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             Save();
+        }
+
+        private void _mainWindow_Drop(object sender, DragEventArgs e)
+        {
+            var files =
+                ((string[])e.Data.GetData(DataFormats.FileDrop))
+                .Select(path => new FileInfo(path))
+                .ToArray();
+
+            if (files.Length == 1 && Editor.Document.UndoStack.IsOriginalFile)
+            {
+                _viewModel.OpenFile(files[0]);
+            }
+            else
+            {
+                // Start new instances of this program
+                foreach (var file in files)
+                {
+                    var exePath = Environment.GetCommandLineArgs()[0];
+                    var commandLine = string.Format("{0}", file.FullName);
+                    Process.Start(exePath, commandLine);
+                }
+            }
         }
     }
 }

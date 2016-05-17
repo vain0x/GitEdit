@@ -7,6 +7,8 @@
     xmlns:view="clr-namespace:GitEdit.View"
     Title="{Binding Title}"
     Width="512" Height="640"
+    AllowDrop="True"
+    Drop="_mainWindow_Drop"
     >
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
