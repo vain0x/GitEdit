@@ -28,6 +28,6 @@
 
         <Span color="Metadata" begin="^\+\+\+" />
         <Span color="Metadata" begin="^---" />
-        <Span color="Metadata" begin="^@" end="@$" />
+        <Span color="Metadata" begin="^@@" end="@@" />
     </RuleSet>
 </SyntaxDefinition>
