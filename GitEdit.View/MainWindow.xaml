@@ -1,0 +1,39 @@
+﻿<Window
+    x:Name="_mainWindow"
+    x:Class="GitEdit.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:view="clr-namespace:GitEdit.View"
+    Title="{Binding Title}"
+    Width="512" Height="640"
+    >
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="ApplicationCommands.Save"
+            Executed="SaveCommandExecuted"
+            />
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+Q" Command="{Binding SaveQuitCommand}" />
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <view:MyTextEditor x:Name="_editor" />
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Clear" Command="{Binding ClearQuitCommand}" />
+                <Button Content="Save &amp; Quit" Command="{Binding SaveQuitCommand}" ToolTip="Ctrl+Q" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
