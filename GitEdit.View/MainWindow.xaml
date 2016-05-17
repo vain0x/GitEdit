@@ -32,6 +32,10 @@
         </Grid.RowDefinitions>
         <view:MyTextEditor x:Name="_editor" />
         <Grid Grid.Row="1">
+            <StatusBar>
+                <StatusBarItem Content="{Binding SyntaxName}" />
+                <StatusBarItem Content="{Binding EncodingName}" />
+            </StatusBar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Clear" Command="{Binding ClearQuitCommand}" />
                 <Button Content="Save &amp; Quit" Command="{Binding SaveQuitCommand}" ToolTip="Ctrl+Q" />

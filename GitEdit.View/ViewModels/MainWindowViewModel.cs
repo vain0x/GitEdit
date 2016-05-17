@@ -53,9 +53,28 @@ namespace GitEdit.View.Model
             }
         }
 
+        public string SyntaxName
+        {
+            get { return Editor.SyntaxHighlighting.Name; }
+        }
+
+        public string EncodingName
+        {
+            get { return Editor.Encoding.EncodingName; }
+        }
+
+        private void UpdateStatusBar()
+        {
+            foreach (var name in new string[] { "SyntaxName", "EncodingName" })
+            {
+                NotifyPropertyChanged(name);
+            }
+        }
+
         public void OpenFile(FileInfo file)
         {
             Editor.LoadFile(file);
+            UpdateStatusBar();
         }
 
         public void SaveFile(FileInfo file)
