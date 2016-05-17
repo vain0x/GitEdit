@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitEdit.View", "GitEdit.View\GitEdit.View.csproj", "{6E37739C-2CF6-414F-8829-8094611124A9}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "GitEdit.Model", "GitEdit.Model\GitEdit.Model.fsproj", "{EC2A1054-F205-45CF-B751-FA95CC4AFCD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2A1054-F205-45CF-B751-FA95CC4AFCD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2A1054-F205-45CF-B751-FA95CC4AFCD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2A1054-F205-45CF-B751-FA95CC4AFCD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2A1054-F205-45CF-B751-FA95CC4AFCD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
