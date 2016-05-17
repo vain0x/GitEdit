@@ -33,6 +33,8 @@ namespace GitEdit.View
             RegisterSyntaxHighlightings();
 
             DataContext = _viewModel = new View.Model.MainWindowViewModel(this);
+
+            _editor.Focus();
         }
 
         private View.Model.MainWindowViewModel _viewModel;
