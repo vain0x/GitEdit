@@ -12,11 +12,13 @@ namespace GitEdit.View
         public static string AppName = "GitEdit";
 
         public static string CommitMessageSyntaxName = "CommitMessage";
+        public static string IniSyntaxName = "Ini";
 
-        public static string[] SyntaxNames =
-            new string[]
+        public static Tuple<string, string[]>[] SyntaxDefinitions =
+            new[]
             {
-                CommitMessageSyntaxName,
+                Tuple.Create(CommitMessageSyntaxName, new string[] { }),
+                Tuple.Create(IniSyntaxName, new string[] { ".ini", ".cfg", ".gitconfig" }),
             };
     }
 }

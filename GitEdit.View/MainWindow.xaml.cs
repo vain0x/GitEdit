@@ -48,9 +48,9 @@ namespace GitEdit.View
 
         private void RegisterSyntaxHighlightings()
         {
-            foreach (var name in Constant.SyntaxNames)
+            foreach (var def in Constant.SyntaxDefinitions)
             {
-                AvalonEditUtility.RegisterSyntaxHighlightDefinition(name, new string[] {});
+                AvalonEditUtility.RegisterSyntaxHighlightDefinition(def.Item1, def.Item2);
             }
         }
 
