@@ -4,7 +4,7 @@
     xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008"
     >
     <Color name="Comment" foreground="Gray" />
-    <Color name="Metadata" foreground="DarkBlue" />
+    <Color name="Metadata" foreground="Gray" />
     <Color name="MetaTag" foreground="#F0F0F0" />
     <Color name="InsertionLine" background="#F0FFF0" />
     <Color name="InsertionWord" foreground="Green" />
@@ -12,7 +12,7 @@
     <Color name="DeletionWord" foreground="Red" />
 
     <RuleSet>
-        <Span color="Comment" begin="#" />
+        <Span color="Comment" begin="^#" />
 
         <Span color="InsertionWord" multiline="true">
             <Begin color="MetaTag">\{\+</Begin>
@@ -28,6 +28,8 @@
 
         <Span color="Metadata" begin="^\+\+\+" />
         <Span color="Metadata" begin="^---" />
-        <Span color="Metadata" begin="^@" end="@$" />
+        <Span color="Metadata" begin="^@@" end="@@" />
+
+        <Span color="Metadata" begin="^(diff|index)" />
     </RuleSet>
 </SyntaxDefinition>
