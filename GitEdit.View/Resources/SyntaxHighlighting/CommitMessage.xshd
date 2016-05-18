@@ -12,7 +12,7 @@
     <Color name="DeletionWord" foreground="Red" />
 
     <RuleSet>
-        <Span color="Comment" begin="#" />
+        <Span color="Comment" begin="^#" />
 
         <Span color="InsertionWord" multiline="true">
             <Begin color="MetaTag">\{\+</Begin>
