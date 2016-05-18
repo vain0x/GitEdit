@@ -1,0 +1,28 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition
+    name="GitIgnore"
+    xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008"
+    >
+    <Color name="Comment" foreground="Gray" />
+    <Color name="Punctuation" foreground="DarkBlue" />
+    <Color name="Wildcard" foreground="Green" />
+    <Color name="NegationMark" foreground="Red" />
+    <Color name="Negative" foreground="DarkRed" />
+
+    <RuleSet>
+        <Span color="Comment" begin="^#" />
+        <Span color="Negative">
+            <Begin color="NegationMark">^!</Begin>
+        </Span>
+
+        <Rule color="Wildcard">
+            [\*\?]
+        </Rule>
+        <Span color="Wildcard" begin="\[" end="\]" />
+
+        <Keywords color="Punctuation">
+            <Word>/</Word>
+        </Keywords>
+        <Span color="Punctuation" begin="\\" end="." />
+    </RuleSet>
+</SyntaxDefinition>
