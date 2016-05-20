@@ -34,8 +34,6 @@ namespace GitEdit.View
 
             DataContext = _viewModel = new View.Model.MainWindowViewModel(this);
 
-            _editor.ShowLineNumbers = true;
-            _editor.WordWrap = true;
             _editor.Focus();
         }
 

@@ -39,7 +39,17 @@
             Margin="5"
             FontFamily="{Binding FontFamily}"
             FontSize="{Binding FontSize}"
-            />
+            ShowLineNumbers="True"
+            WordWrap="True"
+            >
+            <view:MyTextEditor.Options>
+                <avalonEdit:TextEditorOptions
+                    CutCopyWholeLine="False"
+                    HighlightCurrentLine="True"
+                    ShowTabs="True"
+                    />
+            </view:MyTextEditor.Options>
+        </view:MyTextEditor>
         <Grid Grid.Row="1">
             <StatusBar>
                 <StatusBarItem Content="{Binding SyntaxName}" />
