@@ -72,12 +72,12 @@ namespace GitEdit.View.Model
 
         public string SyntaxName
         {
-            get { return Editor.SyntaxHighlighting.Name; }
+            get { return Editor.SyntaxHighlighting.RefBind(x => x.Name); }
         }
 
         public string EncodingName
         {
-            get { return Editor.Encoding.EncodingName; }
+            get { return Editor.Encoding.RefBind(x => x.EncodingName); }
         }
 
         private void UpdateStatusBar()

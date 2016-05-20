@@ -54,6 +54,7 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Utilities\LinqUtility.cs" />
     <Compile Include="Utilities\AvalonEditUtility.cs" />
     <Compile Include="Utilities\IOUtility.cs" />
     <Compile Include="ViewModels\MyTextEditor.cs" />
