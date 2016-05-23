@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
@@ -25,8 +26,19 @@ namespace GitEdit.View.Model
             var args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
-                var file = new FileInfo(args[1]);
-                if (file.Exists) { OpenFile(file); }
+                if (args[1] == "--wait")
+                {
+                    Wait();
+                }
+                else
+                {
+                    var path = args[1];
+                    if (! TryWakeUp(path))
+                    {
+                        var file = new FileInfo(path);
+                        if (file.Exists) { OpenFile(file); }
+                    }
+                }
             }
         }
 
@@ -122,11 +134,69 @@ namespace GitEdit.View.Model
             Editor.Document.Text = "";
             SaveQuit();
         }
+
+        public void OnClosed()
+        {
+            if (_wait == null)
+            {
+                App.Start("--wait");
+            }
+            else
+            {
+                _wait.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 待機モードを開始する。
+        /// </summary>
+        private void Wait()
+        {
+            _wait = new Wait(
+                timeout: new TimeSpan(1, 0, 0),
+                wakeUpEvent: (sender, text) =>
+                {
+                    _view.Dispatcher.Invoke(() =>
+                    {
+                        OpenFile(new FileInfo(text));
+                        _view.Show();
+                    });
+                });
+            _view.Hide();
+        }
+
+        /// <summary>
+        /// 待機中のプロセスがあれば、それを起こす。
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private bool TryWakeUp(string path)
+        {
+            _waitWatcher = Model.Wait.TryWakeUp(
+                path,
+                () => (sender, e) => Application.Current.Shutdown()
+                );
+            if (_waitWatcher == null)
+            {
+                return false;
+            }
+            else
+            {
+                _view.Hide();
+                return true;
+            }
+        }
+
+        private Wait _wait;
+        private Wait.FinishWatcher _waitWatcher;
     }
 
     public interface IMainWindow
     {
         MyTextEditor Editor { get; }
+        Dispatcher Dispatcher { get; }
+        void Show();
+        void Hide();
         void Save();
         void Quit();
     }

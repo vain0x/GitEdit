@@ -93,12 +93,9 @@ namespace GitEdit.View
             }
             else
             {
-                // Start new instances of this program
                 foreach (var file in files)
                 {
-                    var exePath = Environment.GetCommandLineArgs()[0];
-                    var commandLine = string.Format("{0}", file.FullName);
-                    Process.Start(exePath, commandLine);
+                    App.Start(string.Format("{0}", file.FullName));
                 }
             }
         }
@@ -108,6 +105,8 @@ namespace GitEdit.View
             var settings = Properties.Settings.Default;
             settings.MainWindowRect = new Rect(Left, Top, Width, Height);
             settings.Save();
+
+            _viewModel.OnClosed();
         }
     }
 }

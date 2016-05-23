@@ -28,5 +28,15 @@ namespace GitEdit.View
                 throw e;
             }
         }
+
+        public static string ReadText(this FileInfo self)
+        {
+            return File.ReadAllText(self.FullName);
+        }
+
+        public static void WriteText(this FileInfo self, string text)
+        {
+            File.WriteAllText(self.FullName, text);
+        }
     }
 }

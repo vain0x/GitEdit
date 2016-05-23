@@ -57,6 +57,7 @@
     <Compile Include="Utilities\LinqUtility.cs" />
     <Compile Include="Utilities\AvalonEditUtility.cs" />
     <Compile Include="Utilities\IOUtility.cs" />
+    <Compile Include="Utilities\Wait.cs" />
     <Compile Include="ViewModels\MyTextEditor.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\ViewModelBase.cs" />
