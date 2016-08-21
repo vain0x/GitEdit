@@ -14,7 +14,6 @@ namespace GitEdit.View
         , ITextEditor
     {
         public MyTextEditor()
-            : base()
         {
             DependencyPropertyDescriptor
                 .FromProperty(IsModifiedProperty, typeof(TextEditor))
