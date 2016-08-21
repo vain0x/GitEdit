@@ -54,6 +54,7 @@
     <ApplicationDefinition Include="View\App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Utility\GenericExtensions.cs" />
     <Compile Include="Utility\IOUtility.cs" />
     <Compile Include="ViewModel\ITextEditor.cs" />
     <Compile Include="View\MyTextEditor.cs" />

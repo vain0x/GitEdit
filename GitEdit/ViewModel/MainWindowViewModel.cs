@@ -7,6 +7,7 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using GitEdit.Properties;
+using GitEdit.Utility;
 
 namespace GitEdit.ViewModel
 {
@@ -65,10 +66,12 @@ namespace GitEdit.ViewModel
         }
 
         public string SyntaxName =>
-            Editor.SyntaxHighlighting.Name;
+            Editor.SyntaxHighlighting
+            .ApplyTo(h => h == null ? "Plain text" : h.Name);
 
         public string EncodingName =>
-            Editor.Encoding.EncodingName;
+            Editor.Encoding
+            .ApplyTo(e => e == null ? "No encoding" : e.EncodingName);
 
         private void UpdateStatusBar()
         {
