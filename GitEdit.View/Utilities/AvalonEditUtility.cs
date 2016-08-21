@@ -12,10 +12,10 @@ namespace GitEdit.View
         public static void RegisterSyntaxHighlightDefinition(string name, string[] extensions)
         {
             var path = string.Format("GitEdit.View.Resources.SyntaxHighlighting.{0}.xshd", name);
-            using (Stream stream = typeof(MainWindow).Assembly.GetManifestResourceStream(path))
+            using (var stream = typeof(MainWindow).Assembly.GetManifestResourceStream(path))
             {
                 if (stream == null) { throw new InvalidOperationException("Embedded resource not found"); }
-                using (XmlReader reader = new XmlTextReader(stream))
+                using (var reader = new XmlTextReader(stream))
                 {
                     HighlightingManager.Instance.RegisterHighlighting(
                         name,
