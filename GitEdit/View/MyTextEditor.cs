@@ -81,6 +81,7 @@ namespace GitEdit.View
             base.Load(file.FullName);
             Document.FileName = file.FullName;
 
+            // NOTE: It's better to listen Document.FileNameChanged and set syntax.
             var syntax = TryDetectSyntaxHighlighting(file);
             if (syntax != null) { SyntaxHighlighting = syntax; }
         }
