@@ -66,7 +66,7 @@ namespace GitEdit.View
 
         public void SaveFile(FileInfo file)
         {
-            file.OverwriteSafely(tempFile =>
+            file.UpdateSafely(tempFile =>
             {
                 using (var stream = tempFile.OpenWrite())
                 {

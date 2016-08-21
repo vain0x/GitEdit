@@ -13,7 +13,7 @@ namespace GitEdit.Model
             }
         }
 
-        public static void OverwriteSafely(this FileInfo self, Action<FileInfo> f)
+        public static void UpdateSafely(this FileInfo self, Action<FileInfo> f)
         {
             var tempFile = new FileInfo(Path.GetTempFileName());
             try
