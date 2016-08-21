@@ -35,7 +35,6 @@ namespace GitEdit.View
         public MainWindow()
         {
             InitializeComponent();
-            RegisterSyntaxHighlightings();
 
             base.DataContext = new MainWindowViewModel(this);
 
@@ -46,14 +45,6 @@ namespace GitEdit.View
 
         public ITextEditor Editor =>
             _editor;
-
-        private void RegisterSyntaxHighlightings()
-        {
-            foreach (var def in Constant.SyntaxDefinitions)
-            {
-                AvalonEditUtility.RegisterSyntaxHighlightDefinition(def.Item1, def.Item2);
-            }
-        }
 
         public void Quit()
         {
