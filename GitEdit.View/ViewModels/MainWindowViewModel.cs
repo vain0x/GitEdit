@@ -95,9 +95,16 @@ namespace GitEdit.View.ViewModel
             UpdateStatusBar();
         }
 
-        public void SaveFile(FileInfo file)
+        public void Save()
         {
-            Editor.SaveFile(file);
+            var currentFileName = _view.CurrentFileName;
+            var fileInfoOrNull =
+                string.IsNullOrEmpty(currentFileName)
+                ? _view.GetSaveFileOrNull()
+                : new FileInfo(currentFileName);
+            if (fileInfoOrNull == null) return;
+
+            Editor.SaveFile(fileInfoOrNull);
         }
 
         private RelayCommand _saveQuitCommand;
@@ -108,7 +115,7 @@ namespace GitEdit.View.ViewModel
 
         public void SaveQuit()
         {
-            _view.Save();
+            Save();
             _view.Quit();
         }
 
@@ -128,7 +135,8 @@ namespace GitEdit.View.ViewModel
     public interface IMainWindow
     {
         MyTextEditor Editor { get; }
-        void Save();
+        string CurrentFileName { get; }
+        FileInfo GetSaveFileOrNull();
         void Quit();
     }
 }

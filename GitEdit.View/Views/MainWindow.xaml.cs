@@ -61,28 +61,25 @@ namespace GitEdit.View
             Close();
         }
 
-        public void Save()
+        string ViewModel.IMainWindow.CurrentFileName =>
+            Editor.Document.FileName;
+
+        #region Save
+        FileInfo ViewModel.IMainWindow.GetSaveFileOrNull()
         {
-            if (string.IsNullOrEmpty(Editor.Document.FileName))
-            {
-                var sfd = new SaveFileDialog();
-                var result = sfd.ShowDialog(this);
-                if (result.HasValue && result.Value)
-                {
-                    var file = new FileInfo(sfd.FileName);
-                    DataContext.SaveFile(file);
-                }
-            }
-            else
-            {
-                DataContext.SaveFile(new FileInfo(Editor.Document.FileName));
-            }
+            var sfd = new SaveFileDialog();
+            var result = sfd.ShowDialog(this);
+            return
+                result.HasValue && result.Value
+                ? new FileInfo(sfd.FileName)
+                : null;
         }
         
         private void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Save();
+            DataContext.Save();
         }
+        #endregion
 
         private void _mainWindow_Drop(object sender, DragEventArgs e)
         {
