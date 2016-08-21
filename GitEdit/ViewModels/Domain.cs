@@ -5,7 +5,7 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
-namespace GitEdit.View
+namespace GitEdit.ViewModel
 {
     public static class Constant
     {

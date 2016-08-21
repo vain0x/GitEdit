@@ -4,6 +4,7 @@ using System.Xml;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
+using GitEdit.ViewModel;
 
 namespace GitEdit.View
 {

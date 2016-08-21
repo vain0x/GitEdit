@@ -8,7 +8,7 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 using GitEdit.Properties;
 
-namespace GitEdit.View.ViewModel
+namespace GitEdit.ViewModel
 {
     public class MainWindowViewModel
         : ViewModelBase

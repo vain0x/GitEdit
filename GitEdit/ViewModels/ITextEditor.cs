@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 
-namespace GitEdit.View.ViewModel
+namespace GitEdit.ViewModel
 {
     public interface ITextEditor
         : ITextEditorComponent
