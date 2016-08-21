@@ -16,17 +16,35 @@ namespace GitEdit.View
         : TextEditor
         , ITextEditor
     {
-        public MyTextEditor()
+        public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {
             DependencyPropertyDescriptor
-                .FromProperty(IsModifiedProperty, typeof(TextEditor))
-                .AddValueChanged(this, (sender, e) => ModificationIndicatorChanged(this, EventArgs.Empty));
+                .FromProperty(dp, typeof(TextEditor))
+                .AddValueChanged(this, (sender, e) => raise(e));
+        }
+
+        public MyTextEditor()
+        {
+            ListenPropertyChanged(
+                IsModifiedProperty,
+                e => ModificationIndicatorChanged?.Invoke(this, e)
+            );
+            ListenPropertyChanged(
+                SyntaxHighlightingProperty,
+                e => SyntaxHighlightingChanged?.Invoke(this, e)
+            );
+            ListenPropertyChanged(
+                EncodingProperty,
+                e => EncodingChanged?.Invoke(this, e)
+            );
         }
 
         bool ITextEditor.IsOriginal =>
             Document.UndoStack.IsOriginalFile;
 
         public event EventHandler ModificationIndicatorChanged;
+        public event EventHandler SyntaxHighlightingChanged;
+        public event EventHandler EncodingChanged;
 
         #region Syntax highlighting
         public static void RegisterSyntaxHighlightDefinition(string name, Stream stream, string[] extensions)
@@ -63,6 +81,7 @@ namespace GitEdit.View
             base.Load(file.FullName);
             Document.FileName = file.FullName;
 
+            // NOTE: It's better to listen Document.FileNameChanged and set syntax.
             var syntax = TryDetectSyntaxHighlighting(file);
             if (syntax != null) { SyntaxHighlighting = syntax; }
         }

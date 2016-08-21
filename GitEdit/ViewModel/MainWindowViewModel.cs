@@ -22,6 +22,10 @@ namespace GitEdit.ViewModel
                 (sender, e) => NotifyPropertyChanged(nameof(Title));
             Editor.Document.FileNameChanged +=
                 (sender, e) => NotifyPropertyChanged(nameof(Title));
+            Editor.EncodingChanged +=
+                (sender, e) => NotifyPropertyChanged(nameof(EncodingName));
+            Editor.SyntaxHighlightingChanged +=
+                (sender, e) => NotifyPropertyChanged(nameof(SyntaxName));
 
             // Open the given file
             var args = Environment.GetCommandLineArgs();
@@ -73,18 +77,9 @@ namespace GitEdit.ViewModel
             Editor.Encoding
             .ApplyTo(e => e == null ? "No encoding" : e.EncodingName);
 
-        private void UpdateStatusBar()
-        {
-            foreach (var name in new string[] { nameof(SyntaxName), nameof(EncodingName) })
-            {
-                NotifyPropertyChanged(name);
-            }
-        }
-
         public void OpenFile(FileInfo file)
         {
             Editor.LoadFile(file);
-            UpdateStatusBar();
         }
 
         public void Save()
