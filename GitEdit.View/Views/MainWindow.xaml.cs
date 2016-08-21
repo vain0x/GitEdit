@@ -27,17 +27,17 @@ namespace GitEdit.View
     /// </summary>
     public partial class MainWindow
         : Window
-        , ViewModel.IMainWindow
+        , IMainWindow
     {
-        public new ViewModel.MainWindowViewModel DataContext =>
-            (ViewModel.MainWindowViewModel)base.DataContext;
+        public new MainWindowViewModel DataContext =>
+            (MainWindowViewModel)base.DataContext;
 
         public MainWindow()
         {
             InitializeComponent();
             RegisterSyntaxHighlightings();
 
-            base.DataContext = new ViewModel.MainWindowViewModel(this);
+            base.DataContext = new MainWindowViewModel(this);
 
             _editor.ShowLineNumbers = true;
             _editor.WordWrap = true;
@@ -61,7 +61,7 @@ namespace GitEdit.View
         }
 
         #region Save
-        FileInfo ViewModel.IMainWindow.GetSaveFileOrNull()
+        FileInfo IMainWindow.GetSaveFileOrNull()
         {
             var sfd = new SaveFileDialog();
             var result = sfd.ShowDialog(this);
