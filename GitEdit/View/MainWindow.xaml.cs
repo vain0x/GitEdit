@@ -46,7 +46,7 @@ namespace GitEdit.View
         public ITextEditor Editor =>
             _editor;
 
-        public void Quit()
+        void IMainWindow.Quit()
         {
             Close();
         }
