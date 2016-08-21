@@ -26,17 +26,17 @@ namespace GitEdit.View
     /// </summary>
     public partial class MainWindow
         : Window
-        , View.Model.IMainWindow
+        , ViewModel.IMainWindow
     {
-        public new View.Model.MainWindowViewModel DataContext =>
-            (View.Model.MainWindowViewModel)base.DataContext;
+        public new ViewModel.MainWindowViewModel DataContext =>
+            (ViewModel.MainWindowViewModel)base.DataContext;
 
         public MainWindow()
         {
             InitializeComponent();
             RegisterSyntaxHighlightings();
 
-            base.DataContext = new View.Model.MainWindowViewModel(this);
+            base.DataContext = new ViewModel.MainWindowViewModel(this);
 
             _editor.ShowLineNumbers = true;
             _editor.WordWrap = true;
