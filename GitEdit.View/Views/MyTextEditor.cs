@@ -17,7 +17,7 @@ namespace GitEdit.View
         {
             DependencyPropertyDescriptor
                 .FromProperty(IsModifiedProperty, typeof(TextEditor))
-                .AddValueChanged(this, (sender, e) => ModificationIndicatorChanged(this, null));
+                .AddValueChanged(this, (sender, e) => ModificationIndicatorChanged(this, EventArgs.Empty));
         }
 
         public event EventHandler ModificationIndicatorChanged;
