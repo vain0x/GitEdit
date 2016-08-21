@@ -29,12 +29,22 @@ namespace GitEdit.View
                 IsModifiedProperty,
                 e => ModificationIndicatorChanged?.Invoke(this, e)
             );
+            ListenPropertyChanged(
+                SyntaxHighlightingProperty,
+                e => SyntaxHighlightingChanged?.Invoke(this, e)
+            );
+            ListenPropertyChanged(
+                EncodingProperty,
+                e => EncodingChanged?.Invoke(this, e)
+            );
         }
 
         bool ITextEditor.IsOriginal =>
             Document.UndoStack.IsOriginalFile;
 
         public event EventHandler ModificationIndicatorChanged;
+        public event EventHandler SyntaxHighlightingChanged;
+        public event EventHandler EncodingChanged;
 
         #region Syntax highlighting
         public static void RegisterSyntaxHighlightDefinition(string name, Stream stream, string[] extensions)

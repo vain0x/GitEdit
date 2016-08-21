@@ -18,6 +18,8 @@ namespace GitEdit.ViewModel
         bool IsOriginal { get; }
 
         event EventHandler ModificationIndicatorChanged;
+        event EventHandler SyntaxHighlightingChanged;
+        event EventHandler EncodingChanged;
 
         IHighlightingDefinition SyntaxHighlighting { get; }
         Encoding Encoding { get; }
