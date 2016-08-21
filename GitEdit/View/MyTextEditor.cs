@@ -16,11 +16,19 @@ namespace GitEdit.View
         : TextEditor
         , ITextEditor
     {
-        public MyTextEditor()
+        public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {
             DependencyPropertyDescriptor
-                .FromProperty(IsModifiedProperty, typeof(TextEditor))
-                .AddValueChanged(this, (sender, e) => ModificationIndicatorChanged(this, EventArgs.Empty));
+                .FromProperty(dp, typeof(TextEditor))
+                .AddValueChanged(this, (sender, e) => raise(e));
+        }
+
+        public MyTextEditor()
+        {
+            ListenPropertyChanged(
+                IsModifiedProperty,
+                e => ModificationIndicatorChanged(this, e)
+            );
         }
 
         bool ITextEditor.IsOriginal =>
