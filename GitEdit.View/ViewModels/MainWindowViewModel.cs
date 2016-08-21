@@ -18,9 +18,9 @@ namespace GitEdit.View.ViewModel
             _view = view;
 
             Editor.ModificationIndicatorChanged +=
-                (sender, e) => NotifyPropertyChanged("Title");
+                (sender, e) => NotifyPropertyChanged(nameof(Title));
             Editor.Document.FileNameChanged +=
-                (sender, e) => NotifyPropertyChanged("Title");
+                (sender, e) => NotifyPropertyChanged(nameof(Title));
 
             // Open the given file
             var args = Environment.GetCommandLineArgs();
@@ -33,10 +33,8 @@ namespace GitEdit.View.ViewModel
 
         private IMainWindow _view;
 
-        private MyTextEditor Editor
-        {
-            get { return _view.Editor; }
-        }
+        private MyTextEditor Editor =>
+            _view.Editor;
 
         private Rect _rect = Settings.Default.MainWindowRect;
         public Rect Rect
@@ -45,15 +43,11 @@ namespace GitEdit.View.ViewModel
             set { SetProperty(ref _rect, value); }
         }
 
-        public string FontFamily
-        {
-            get { return Settings.Default.FontFamily; }
-        }
+        public string FontFamily =>
+            Settings.Default.FontFamily;
 
-        public int FontSize
-        {
-            get { return Settings.Default.FontSize; }
-        }
+        public int FontSize =>
+            Settings.Default.FontSize;
 
         public string Title
         {
@@ -71,19 +65,15 @@ namespace GitEdit.View.ViewModel
             }
         }
 
-        public string SyntaxName
-        {
-            get { return Editor.SyntaxHighlighting.Name; }
-        }
+        public string SyntaxName =>
+            Editor.SyntaxHighlighting.Name;
 
-        public string EncodingName
-        {
-            get { return Editor.Encoding.EncodingName; }
-        }
+        public string EncodingName =>
+            Editor.Encoding.EncodingName;
 
         private void UpdateStatusBar()
         {
-            foreach (var name in new string[] { "SyntaxName", "EncodingName" })
+            foreach (var name in new string[] { nameof(SyntaxName), nameof(EncodingName) })
             {
                 NotifyPropertyChanged(name);
             }
@@ -108,10 +98,9 @@ namespace GitEdit.View.ViewModel
         }
 
         private RelayCommand _saveQuitCommand;
-        public ICommand SaveQuitCommand
-        {
-            get { return _saveQuitCommand ?? (_saveQuitCommand = new RelayCommand(_ => SaveQuit())); }
-        }
+        public ICommand SaveQuitCommand =>
+            _saveQuitCommand
+            ?? (_saveQuitCommand = new RelayCommand(_ => SaveQuit()));
 
         public void SaveQuit()
         {
@@ -120,10 +109,9 @@ namespace GitEdit.View.ViewModel
         }
 
         private RelayCommand _clearQuitCommand;
-        public ICommand ClearQuitCommand
-        {
-            get { return _clearQuitCommand ?? (_clearQuitCommand = new RelayCommand(_ => ClearQuit())); }
-        }
+        public ICommand ClearQuitCommand =>
+            _clearQuitCommand
+            ?? (_clearQuitCommand = new RelayCommand(_ => ClearQuit()));
 
         public void ClearQuit()
         {
