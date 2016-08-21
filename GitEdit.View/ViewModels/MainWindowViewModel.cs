@@ -6,6 +6,7 @@ using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
+using GitEdit.View.Properties;
 
 namespace GitEdit.View.Model
 {
@@ -37,7 +38,7 @@ namespace GitEdit.View.Model
             get { return _view.Editor; }
         }
 
-        private Rect _rect = Properties.Settings.Default.MainWindowRect;
+        private Rect _rect = Settings.Default.MainWindowRect;
         public Rect Rect
         {
             get { return _rect; }
@@ -46,12 +47,12 @@ namespace GitEdit.View.Model
 
         public string FontFamily
         {
-            get { return Properties.Settings.Default.FontFamily; }
+            get { return Settings.Default.FontFamily; }
         }
 
         public int FontSize
         {
-            get { return Properties.Settings.Default.FontSize; }
+            get { return Settings.Default.FontSize; }
         }
 
         public string Title

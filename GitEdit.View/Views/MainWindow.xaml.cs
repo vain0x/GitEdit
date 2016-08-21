@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using ICSharpCode.AvalonEdit;
+using GitEdit.View.Properties;
 
 namespace GitEdit.View
 {
@@ -107,7 +108,7 @@ namespace GitEdit.View
 
         private void _mainWindow_Closed(object sender, EventArgs e)
         {
-            var settings = Properties.Settings.Default;
+            var settings = Settings.Default;
             settings.MainWindowRect = new Rect(Left, Top, Width, Height);
             settings.Save();
         }
