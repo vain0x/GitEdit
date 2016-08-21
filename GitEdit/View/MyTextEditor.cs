@@ -27,7 +27,7 @@ namespace GitEdit.View
         {
             ListenPropertyChanged(
                 IsModifiedProperty,
-                e => ModificationIndicatorChanged(this, e)
+                e => ModificationIndicatorChanged?.Invoke(this, e)
             );
         }
 
