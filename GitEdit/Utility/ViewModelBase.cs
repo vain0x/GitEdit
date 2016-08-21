@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace GitEdit.View
+namespace GitEdit.ViewModel
 {
     public class ViewModelBase
         : INotifyPropertyChanged

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace GitEdit.View
+namespace GitEdit.Model
 {
     public static class FileInfoExtensions
     {
@@ -13,7 +13,7 @@ namespace GitEdit.View
             }
         }
 
-        public static void OverwriteSafely(this FileInfo self, Action<FileInfo> f)
+        public static void UpdateSafely(this FileInfo self, Action<FileInfo> f)
         {
             var tempFile = new FileInfo(Path.GetTempFileName());
             try

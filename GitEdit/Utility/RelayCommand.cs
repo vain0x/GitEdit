@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace GitEdit.View
+namespace GitEdit.ViewModel
 {
     public class RelayCommand
         : ICommand

@@ -6,8 +6,9 @@ using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
+using GitEdit.Properties;
 
-namespace GitEdit.View.Model
+namespace GitEdit.ViewModel
 {
     public class MainWindowViewModel
         : ViewModelBase
@@ -17,9 +18,9 @@ namespace GitEdit.View.Model
             _view = view;
 
             Editor.ModificationIndicatorChanged +=
-                (sender, e) => NotifyPropertyChanged("Title");
+                (sender, e) => NotifyPropertyChanged(nameof(Title));
             Editor.Document.FileNameChanged +=
-                (sender, e) => NotifyPropertyChanged("Title");
+                (sender, e) => NotifyPropertyChanged(nameof(Title));
 
             // Open the given file
             var args = Environment.GetCommandLineArgs();
@@ -32,57 +33,46 @@ namespace GitEdit.View.Model
 
         private IMainWindow _view;
 
-        private MyTextEditor Editor
-        {
-            get { return _view.Editor; }
-        }
+        private ITextEditor Editor =>
+            _view.Editor;
 
-        private Rect _rect = Properties.Settings.Default.MainWindowRect;
+        private Rect _rect = Settings.Default.MainWindowRect;
         public Rect Rect
         {
             get { return _rect; }
             set { SetProperty(ref _rect, value); }
         }
 
-        public string FontFamily
-        {
-            get { return Properties.Settings.Default.FontFamily; }
-        }
+        public string FontFamily =>
+            Settings.Default.FontFamily;
 
-        public int FontSize
-        {
-            get { return Properties.Settings.Default.FontSize; }
-        }
+        public int FontSize =>
+            Settings.Default.FontSize;
 
         public string Title
         {
             get
             {
-                var doc = Editor.Document;
-                if (doc == null) return Constant.AppName;
+                var currentFileName = Editor.Document?.FileName;
                 var fileName =
-                    string.IsNullOrEmpty(doc.FileName)
+                    string.IsNullOrEmpty(currentFileName)
                     ? "untitled"
-                    : Path.GetFileName(doc.FileName);
+                    : Path.GetFileName(currentFileName);
                 var indicator =
-                    _view.Editor.IsModified ? " *" : "";
+                    Editor.IsOriginal ? "" : " *";
                 return string.Format("{0}{1} | {2}", fileName, indicator, Constant.AppName);
             }
         }
 
-        public string SyntaxName
-        {
-            get { return Editor.SyntaxHighlighting.Name; }
-        }
+        public string SyntaxName =>
+            Editor.SyntaxHighlighting.Name;
 
-        public string EncodingName
-        {
-            get { return Editor.Encoding.EncodingName; }
-        }
+        public string EncodingName =>
+            Editor.Encoding.EncodingName;
 
         private void UpdateStatusBar()
         {
-            foreach (var name in new string[] { "SyntaxName", "EncodingName" })
+            foreach (var name in new string[] { nameof(SyntaxName), nameof(EncodingName) })
             {
                 NotifyPropertyChanged(name);
             }
@@ -94,28 +84,33 @@ namespace GitEdit.View.Model
             UpdateStatusBar();
         }
 
-        public void SaveFile(FileInfo file)
+        public void Save()
         {
-            Editor.SaveFile(file);
+            var currentFileName = Editor.Document?.FileName;
+            var fileInfoOrNull =
+                string.IsNullOrEmpty(currentFileName)
+                ? _view.GetSaveFileOrNull()
+                : new FileInfo(currentFileName);
+            if (fileInfoOrNull == null) return;
+
+            Editor.SaveFile(fileInfoOrNull);
         }
 
         private RelayCommand _saveQuitCommand;
-        public ICommand SaveQuitCommand
-        {
-            get { return _saveQuitCommand ?? (_saveQuitCommand = new RelayCommand(_ => SaveQuit())); }
-        }
+        public ICommand SaveQuitCommand =>
+            _saveQuitCommand
+            ?? (_saveQuitCommand = new RelayCommand(_ => SaveQuit()));
 
         public void SaveQuit()
         {
-            _view.Save();
+            Save();
             _view.Quit();
         }
 
         private RelayCommand _clearQuitCommand;
-        public ICommand ClearQuitCommand
-        {
-            get { return _clearQuitCommand ?? (_clearQuitCommand = new RelayCommand(_ => ClearQuit())); }
-        }
+        public ICommand ClearQuitCommand =>
+            _clearQuitCommand
+            ?? (_clearQuitCommand = new RelayCommand(_ => ClearQuit()));
 
         public void ClearQuit()
         {
@@ -126,8 +121,8 @@ namespace GitEdit.View.Model
 
     public interface IMainWindow
     {
-        MyTextEditor Editor { get; }
-        void Save();
+        ITextEditor Editor { get; }
+        FileInfo GetSaveFileOrNull();
         void Quit();
     }
 }
