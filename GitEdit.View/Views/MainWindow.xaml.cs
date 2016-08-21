@@ -28,20 +28,21 @@ namespace GitEdit.View
         : Window
         , View.Model.IMainWindow
     {
+        public new View.Model.MainWindowViewModel DataContext =>
+            (View.Model.MainWindowViewModel)base.DataContext;
+
         public MainWindow()
         {
             InitializeComponent();
             RegisterSyntaxHighlightings();
 
-            DataContext = _viewModel = new View.Model.MainWindowViewModel(this);
+            base.DataContext = new View.Model.MainWindowViewModel(this);
 
             _editor.ShowLineNumbers = true;
             _editor.WordWrap = true;
             _editor.Focus();
         }
 
-        private View.Model.MainWindowViewModel _viewModel;
-        
         public MyTextEditor Editor
         {
             get { return _editor; }
@@ -69,12 +70,12 @@ namespace GitEdit.View
                 if (result.HasValue && result.Value)
                 {
                     var file = new FileInfo(sfd.FileName);
-                    _viewModel.SaveFile(file);
+                    DataContext.SaveFile(file);
                 }
             }
             else
             {
-                _viewModel.SaveFile(new FileInfo(Editor.Document.FileName));
+                DataContext.SaveFile(new FileInfo(Editor.Document.FileName));
             }
         }
         
@@ -92,7 +93,7 @@ namespace GitEdit.View
 
             if (files.Length == 1 && Editor.Document.UndoStack.IsOriginalFile)
             {
-                _viewModel.OpenFile(files[0]);
+                DataContext.OpenFile(files[0]);
             }
             else
             {
