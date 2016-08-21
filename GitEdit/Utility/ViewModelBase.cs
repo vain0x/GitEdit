@@ -12,10 +12,8 @@ namespace GitEdit.ViewModel
 
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged == null) return;
-
             Debug.Assert(propertyName != null);
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         protected void SetProperty<X>(ref X r, X x, [CallerMemberName] string propertyName = null)
