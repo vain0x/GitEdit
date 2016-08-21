@@ -105,12 +105,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GitEdit.Model\GitEdit.Model.fsproj">
-      <Project>{ec2a1054-f205-45cf-b751-fa95cc4afcd1}</Project>
-      <Name>GitEdit.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
