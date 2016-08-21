@@ -12,6 +12,11 @@ namespace GitEdit.ViewModel
     public interface ITextEditor
         : ITextEditorComponent
     {
+        /// <summary>
+        /// Gets whether the document has no modification.
+        /// </summary>
+        bool IsOriginal { get; }
+
         event EventHandler ModificationIndicatorChanged;
 
         IHighlightingDefinition SyntaxHighlighting { get; }

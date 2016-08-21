@@ -75,7 +75,7 @@ namespace GitEdit.View
                 .Select(path => new FileInfo(path))
                 .ToArray();
 
-            if (files.Length == 1 && Editor.Document.UndoStack.IsOriginalFile)
+            if (files.Length == 1 && Editor.IsOriginal)
             {
                 DataContext.OpenFile(files[0]);
             }

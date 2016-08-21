@@ -59,7 +59,7 @@ namespace GitEdit.ViewModel
                     ? "untitled"
                     : Path.GetFileName(currentFileName);
                 var indicator =
-                    Editor.Document.UndoStack.IsOriginalFile ? "" : " *";
+                    Editor.IsOriginal ? "" : " *";
                 return string.Format("{0}{1} | {2}", fileName, indicator, Constant.AppName);
             }
         }

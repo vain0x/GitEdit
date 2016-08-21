@@ -23,6 +23,9 @@ namespace GitEdit.View
                 .AddValueChanged(this, (sender, e) => ModificationIndicatorChanged(this, EventArgs.Empty));
         }
 
+        bool ITextEditor.IsOriginal =>
+            Document.UndoStack.IsOriginalFile;
+
         public event EventHandler ModificationIndicatorChanged;
 
         #region Syntax highlighting
