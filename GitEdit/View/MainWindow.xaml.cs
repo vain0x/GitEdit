@@ -38,8 +38,6 @@ namespace GitEdit.View
 
             base.DataContext = new MainWindowViewModel(this);
 
-            _editor.ShowLineNumbers = true;
-            _editor.WordWrap = true;
             _editor.Focus();
         }
 
