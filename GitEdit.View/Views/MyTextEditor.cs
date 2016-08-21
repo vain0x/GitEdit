@@ -4,11 +4,13 @@ using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using ICSharpCode.AvalonEdit;
+using GitEdit.View.ViewModel;
 
 namespace GitEdit.View
 {
     public class MyTextEditor
         : TextEditor
+        , ITextEditor
     {
         public MyTextEditor()
             : base()

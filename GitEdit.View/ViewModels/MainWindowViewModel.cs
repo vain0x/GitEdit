@@ -33,7 +33,7 @@ namespace GitEdit.View.ViewModel
 
         private IMainWindow _view;
 
-        private MyTextEditor Editor =>
+        private ITextEditor Editor =>
             _view.Editor;
 
         private Rect _rect = Settings.Default.MainWindowRect;
@@ -53,14 +53,13 @@ namespace GitEdit.View.ViewModel
         {
             get
             {
-                var doc = Editor.Document;
-                if (doc == null) return Constant.AppName;
+                var currentFileName = Editor.Document?.FileName;
                 var fileName =
-                    string.IsNullOrEmpty(doc.FileName)
+                    string.IsNullOrEmpty(currentFileName)
                     ? "untitled"
-                    : Path.GetFileName(doc.FileName);
+                    : Path.GetFileName(currentFileName);
                 var indicator =
-                    _view.Editor.IsModified ? " *" : "";
+                    Editor.Document.UndoStack.IsOriginalFile ? "" : " *";
                 return string.Format("{0}{1} | {2}", fileName, indicator, Constant.AppName);
             }
         }
@@ -87,7 +86,7 @@ namespace GitEdit.View.ViewModel
 
         public void Save()
         {
-            var currentFileName = _view.CurrentFileName;
+            var currentFileName = Editor.Document?.FileName;
             var fileInfoOrNull =
                 string.IsNullOrEmpty(currentFileName)
                 ? _view.GetSaveFileOrNull()
@@ -122,8 +121,7 @@ namespace GitEdit.View.ViewModel
 
     public interface IMainWindow
     {
-        MyTextEditor Editor { get; }
-        string CurrentFileName { get; }
+        ITextEditor Editor { get; }
         FileInfo GetSaveFileOrNull();
         void Quit();
     }

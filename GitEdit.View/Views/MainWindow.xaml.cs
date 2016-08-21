@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using Microsoft.Win32;
 using ICSharpCode.AvalonEdit;
 using GitEdit.View.Properties;
+using GitEdit.View.ViewModel;
 
 namespace GitEdit.View
 {
@@ -43,10 +44,8 @@ namespace GitEdit.View
             _editor.Focus();
         }
 
-        public MyTextEditor Editor
-        {
-            get { return _editor; }
-        }
+        public ITextEditor Editor =>
+            _editor;
 
         private void RegisterSyntaxHighlightings()
         {
@@ -60,9 +59,6 @@ namespace GitEdit.View
         {
             Close();
         }
-
-        string ViewModel.IMainWindow.CurrentFileName =>
-            Editor.Document.FileName;
 
         #region Save
         FileInfo ViewModel.IMainWindow.GetSaveFileOrNull()
