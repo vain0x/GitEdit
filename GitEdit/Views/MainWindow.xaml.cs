@@ -17,7 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using ICSharpCode.AvalonEdit;
-using GitEdit.View.Properties;
+using GitEdit.Properties;
 using GitEdit.View.ViewModel;
 
 namespace GitEdit.View
