@@ -23,23 +23,15 @@ namespace GitEdit.View.Editor
         List<CompletionData> CompletionItems { get; } =
             new List<CompletionData>();
 
-        IEnumerable<string> EnumerateCompletionWords(string text)
-        {
-            var regex = new Regex(@"[a-zA-Z_]\w{4,}");
-            var index = 0;
-            while (true)
-            {
-                var match = regex.Match(text, index);
-                if (!match.Success) break;
-                yield return match.Value;
-                index = match.Index + match.Length;
-            }
-        }
+        readonly Regex _completionWordRegex =
+            new Regex(@"[a-zA-Z_]\w{4,}");
 
         void CollectCompletionWords(string text)
         {
             var items =
-                EnumerateCompletionWords(text)
+                _completionWordRegex.Matches(text)
+                .Cast<Match>()
+                .Select(m => m.Value)
                 .Distinct()
                 .Select(word => new CompletionData() { Text = word });
 
