@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -26,6 +27,8 @@ namespace GitEdit.View
             DependencyPropertyDescriptor
                 .FromProperty(dp, typeof(TextEditor))
                 .AddValueChanged(this, (sender, e) => raise(e));
+
+            Encoding = new UTF8Encoding();
         }
 
         public MyTextEditor()
