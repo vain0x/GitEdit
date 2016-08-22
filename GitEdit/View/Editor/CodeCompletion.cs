@@ -49,7 +49,7 @@ namespace GitEdit.View.Editor
             CompletionItems.AddRange(items);
         }
 
-        public void Recollect()
+        public void RecollectCompletionWords()
         {
             CompletionItems.Clear();
             CollectCompletionWords();

@@ -92,7 +92,7 @@ namespace GitEdit.View
             var syntax = TryDetectSyntaxHighlighting(file);
             if (syntax != null) { SyntaxHighlighting = syntax; }
 
-            CodeCompletion.Recollect();
+            CodeCompletion.RecollectCompletionWords();
         }
 
         public void SaveFile(FileInfo file)
