@@ -31,10 +31,7 @@ namespace GitEdit.View.Editor
             {
                 var match = regex.Match(text, index);
                 if (!match.Success) break;
-
-                var word = match.Value;
                 yield return match.Value;
-
                 index = match.Index + match.Length;
             }
         }
