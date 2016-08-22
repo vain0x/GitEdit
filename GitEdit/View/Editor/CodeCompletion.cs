@@ -36,10 +36,10 @@ namespace GitEdit.View.Editor
             }
         }
 
-        void CollectCompletionWords()
+        void CollectCompletionWords(string text)
         {
             var items =
-                EnumerateCompletionWords(Editor.Text)
+                EnumerateCompletionWords(text)
                 .Distinct()
                 .Select(word => new CompletionData() { Text = word });
 
@@ -48,8 +48,12 @@ namespace GitEdit.View.Editor
 
         public void RecollectCompletionWords()
         {
-            CompletionItems.Clear();
-            CollectCompletionWords();
+            var text = Editor.Text;
+            Task.Run(() =>
+            {
+                CompletionItems.Clear();
+                CollectCompletionWords(text);
+            });
         }
         #endregion
 
