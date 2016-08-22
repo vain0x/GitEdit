@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using ICSharpCode.AvalonEdit;
+using GitEdit.Properties;
+using GitEdit.ViewModel;
 
 namespace GitEdit.View
 {
@@ -25,62 +27,44 @@ namespace GitEdit.View
     /// </summary>
     public partial class MainWindow
         : Window
-        , View.Model.IMainWindow
+        , IMainWindow
     {
+        public new MainWindowViewModel DataContext =>
+            (MainWindowViewModel)base.DataContext;
+
         public MainWindow()
         {
             InitializeComponent();
-            RegisterSyntaxHighlightings();
 
-            DataContext = _viewModel = new View.Model.MainWindowViewModel(this);
+            base.DataContext = new MainWindowViewModel(this);
 
-            _editor.ShowLineNumbers = true;
-            _editor.WordWrap = true;
             _editor.Focus();
         }
 
-        private View.Model.MainWindowViewModel _viewModel;
-        
-        public MyTextEditor Editor
-        {
-            get { return _editor; }
-        }
+        public ITextEditor Editor =>
+            _editor;
 
-        private void RegisterSyntaxHighlightings()
-        {
-            foreach (var def in Constant.SyntaxDefinitions)
-            {
-                AvalonEditUtility.RegisterSyntaxHighlightDefinition(def.Item1, def.Item2);
-            }
-        }
-
-        public void Quit()
+        void IMainWindow.Quit()
         {
             Close();
         }
 
-        public void Save()
+        #region Save
+        FileInfo IMainWindow.GetSaveFileOrNull()
         {
-            if (string.IsNullOrEmpty(Editor.Document.FileName))
-            {
-                var sfd = new SaveFileDialog();
-                var result = sfd.ShowDialog(this);
-                if (result.HasValue && result.Value)
-                {
-                    var file = new FileInfo(sfd.FileName);
-                    _viewModel.SaveFile(file);
-                }
-            }
-            else
-            {
-                _viewModel.SaveFile(new FileInfo(Editor.Document.FileName));
-            }
+            var sfd = new SaveFileDialog();
+            var result = sfd.ShowDialog(this);
+            return
+                result.HasValue && result.Value
+                ? new FileInfo(sfd.FileName)
+                : null;
         }
         
         private void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            Save();
+            DataContext.Save();
         }
+        #endregion
 
         private void _mainWindow_Drop(object sender, DragEventArgs e)
         {
@@ -89,9 +73,9 @@ namespace GitEdit.View
                 .Select(path => new FileInfo(path))
                 .ToArray();
 
-            if (files.Length == 1 && Editor.Document.UndoStack.IsOriginalFile)
+            if (files.Length == 1 && Editor.IsOriginal)
             {
-                _viewModel.OpenFile(files[0]);
+                DataContext.OpenFile(files[0]);
             }
             else
             {
@@ -107,7 +91,7 @@ namespace GitEdit.View
 
         private void _mainWindow_Closed(object sender, EventArgs e)
         {
-            var settings = Properties.Settings.Default;
+            var settings = Settings.Default;
             settings.MainWindowRect = new Rect(Left, Top, Width, Height);
             settings.Save();
         }
