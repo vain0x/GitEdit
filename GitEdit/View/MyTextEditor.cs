@@ -20,6 +20,7 @@ namespace GitEdit.View
         public event EventHandler ModificationIndicatorChanged;
         public event EventHandler SyntaxHighlightingChanged;
         public event EventHandler EncodingChanged;
+        public event EventHandler<FileInfo> FileLoaded;
 
         public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {
@@ -46,6 +47,14 @@ namespace GitEdit.View
                 EncodingProperty,
                 e => EncodingChanged?.Invoke(this, e)
             );
+
+            FileLoaded += (sender, file) =>
+            {
+                var syntax = HighlightingManager.TryDetectSyntaxHighlighting(file);
+                if (syntax != null) { SyntaxHighlighting = syntax; }
+
+                CodeCompletion.RecollectCompletionWords();
+            };
         }
 
         bool ITextEditor.IsOriginal =>
@@ -55,12 +64,7 @@ namespace GitEdit.View
         {
             Load(file.FullName);
             Document.FileName = file.FullName;
-
-            // NOTE: It's better to listen Document.FileNameChanged and set syntax.
-            var syntax = HighlightingManager.TryDetectSyntaxHighlighting(file);
-            if (syntax != null) { SyntaxHighlighting = syntax; }
-
-            CodeCompletion.RecollectCompletionWords();
+            FileLoaded?.Invoke(this, file);
         }
 
         public void SaveFile(FileInfo file)
