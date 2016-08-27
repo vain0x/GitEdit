@@ -16,7 +16,7 @@ namespace GitEdit.ViewModel
     {
         public MainWindowViewModel(IMainWindow view)
         {
-            _view = view;
+            View = view;
 
             Editor.ModificationIndicatorChanged +=
                 (sender, e) => NotifyPropertyChanged(nameof(Title));
@@ -36,10 +36,10 @@ namespace GitEdit.ViewModel
             }
         }
 
-        private IMainWindow _view;
+        private IMainWindow View;
 
         private ITextEditor Editor =>
-            _view.Editor;
+            View.Editor;
 
         private Rect _rect = Settings.Default.MainWindowRect;
         public Rect Rect
@@ -87,7 +87,7 @@ namespace GitEdit.ViewModel
             var currentFileName = Editor.Document?.FileName;
             var fileInfoOrNull =
                 string.IsNullOrEmpty(currentFileName)
-                ? _view.GetSaveFileOrNull()
+                ? View.GetSaveFileOrNull()
                 : new FileInfo(currentFileName);
             if (fileInfoOrNull == null) return;
 
@@ -102,7 +102,7 @@ namespace GitEdit.ViewModel
         public void SaveQuit()
         {
             Save();
-            _view.Quit();
+            View.Quit();
         }
 
         private RelayCommand _clearQuitCommand;

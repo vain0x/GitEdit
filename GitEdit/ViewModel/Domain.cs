@@ -9,13 +9,13 @@ namespace GitEdit.ViewModel
 {
     public static class Constant
     {
-        public static string AppName = "GitEdit";
+        public static string AppName => "GitEdit";
 
-        public static string CommitMessageSyntaxName = "CommitMessage";
-        public static string GitIgnoreSyntaxName = "GitIgnore";
-        public static string IniSyntaxName = "Ini";
+        public static string CommitMessageSyntaxName => "CommitMessage";
+        public static string GitIgnoreSyntaxName => "GitIgnore";
+        public static string IniSyntaxName => "Ini";
 
-        public static Tuple<string, string[]>[] SyntaxDefinitions =
+        public static Tuple<string, string[]>[] SyntaxDefinitions =>
             new[]
             {
                 Tuple.Create(CommitMessageSyntaxName, new string[] { }),
