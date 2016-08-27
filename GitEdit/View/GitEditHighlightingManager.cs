@@ -17,6 +17,7 @@ namespace GitEdit.View
             switch (file.Name)
             {
                 case "COMMIT_EDITMSG":
+                case "MERGE_MSG":
                     return HighlightingManager.Instance.GetDefinition(Constant.CommitMessageSyntaxName);
                 default:
                     return HighlightingManager.Instance.GetDefinitionByExtension(file.Extension);
