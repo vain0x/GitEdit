@@ -27,13 +27,12 @@ namespace GitEdit.View
             DependencyPropertyDescriptor
                 .FromProperty(dp, typeof(TextEditor))
                 .AddValueChanged(this, (sender, e) => raise(e));
-
-            Encoding = new UTF8Encoding();
         }
 
         public MyTextEditor()
         {
             CodeCompletion = new CodeCompletion(this);
+            Encoding = new UTF8Encoding();
 
             ListenPropertyChanged(
                 IsModifiedProperty,
