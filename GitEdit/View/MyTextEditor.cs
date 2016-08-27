@@ -88,7 +88,7 @@ namespace GitEdit.View
 
         public void LoadFile(FileInfo file)
         {
-            base.Load(file.FullName);
+            Load(file.FullName);
             Document.FileName = file.FullName;
 
             // NOTE: It's better to listen Document.FileNameChanged and set syntax.
@@ -104,7 +104,7 @@ namespace GitEdit.View
             {
                 using (var stream = tempFile.OpenWrite())
                 {
-                    base.Save(stream);
+                    Save(stream);
                 }
             });
             Document.FileName = file.FullName;
