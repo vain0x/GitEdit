@@ -11,7 +11,10 @@ namespace GitEdit.View
     {
         void RegisterSyntaxHighlightDefinition(string name, Stream stream, string[] extensions)
         {
-            if (stream == null) { throw new InvalidOperationException("Embedded resource not found"); }
+            if (stream == null)
+            {
+                throw new InvalidOperationException("Embedded resource not found");
+            }
 
             using (var reader = new XmlTextReader(stream))
             {
