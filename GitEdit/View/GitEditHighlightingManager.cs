@@ -9,23 +9,6 @@ namespace GitEdit.View
 {
     public class GitEditHighlightingManager
     {
-        void RegisterSyntaxHighlightDefinition(string name, Stream stream, string[] extensions)
-        {
-            if (stream == null)
-            {
-                throw new InvalidOperationException("Embedded resource not found");
-            }
-
-            using (var reader = new XmlTextReader(stream))
-            {
-                HighlightingManager.Instance.RegisterHighlighting(
-                    name,
-                    extensions,
-                    HighlightingLoader.Load(reader, HighlightingManager.Instance)
-                );
-            }
-        }
-
         /// <summary>
         /// Returns the most appropreate syntax definition for given file; or null.
         /// </summary>
@@ -40,6 +23,19 @@ namespace GitEdit.View
             }
         }
 
+        IHighlightingDefinition LoadEmbeddedDefinition(string path)
+        {
+            using (var stream = typeof(MainWindow).Assembly.GetManifestResourceStream(path))
+            using (var reader = new XmlTextReader(stream))
+            {
+                if (stream == null)
+                {
+                    throw new InvalidOperationException("Embedded resource not found");
+                }
+                return HighlightingLoader.Load(reader, HighlightingManager.Instance);
+            }
+        }
+
         public void RegisterSyntaxHighlightings()
         {
             foreach (var def in Constant.SyntaxDefinitions)
@@ -47,10 +43,11 @@ namespace GitEdit.View
                 var name = def.Item1;
                 var path = string.Format("GitEdit.Resource.SyntaxHighlighting.{0}.xshd", name);
 
-                using (var stream = typeof(MainWindow).Assembly.GetManifestResourceStream(path))
-                {
-                    RegisterSyntaxHighlightDefinition(name, stream, def.Item2);
-                }
+                HighlightingManager.Instance.RegisterHighlighting(
+                    name,
+                    def.Item2,
+                    () => LoadEmbeddedDefinition(path)
+                );
             }
         }
 
