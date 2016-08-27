@@ -14,9 +14,14 @@ namespace GitEdit.ViewModel
     public class MainWindowViewModel
         : ViewModelBase
     {
+        public ICommand SaveQuitCommand { get; }
+        public ICommand ClearQuitCommand { get; }
+
         public MainWindowViewModel(IMainWindow view)
         {
             View = view;
+            SaveQuitCommand = new RelayCommand(_ => SaveQuit());
+            ClearQuitCommand = new RelayCommand(_ => ClearQuit());
 
             Editor.ModificationIndicatorChanged +=
                 (sender, e) => NotifyPropertyChanged(nameof(Title));
@@ -36,7 +41,7 @@ namespace GitEdit.ViewModel
             }
         }
 
-        private IMainWindow View;
+        private IMainWindow View { get; }
 
         private ITextEditor Editor =>
             View.Editor;
@@ -94,21 +99,11 @@ namespace GitEdit.ViewModel
             Editor.SaveFile(fileInfoOrNull);
         }
 
-        private RelayCommand _saveQuitCommand;
-        public ICommand SaveQuitCommand =>
-            _saveQuitCommand
-            ?? (_saveQuitCommand = new RelayCommand(_ => SaveQuit()));
-
         public void SaveQuit()
         {
             Save();
             View.Quit();
         }
-
-        private RelayCommand _clearQuitCommand;
-        public ICommand ClearQuitCommand =>
-            _clearQuitCommand
-            ?? (_clearQuitCommand = new RelayCommand(_ => ClearQuit()));
 
         public void ClearQuit()
         {
