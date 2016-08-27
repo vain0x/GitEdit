@@ -27,13 +27,15 @@ namespace GitEdit.View
         IHighlightingDefinition LoadEmbeddedDefinition(string path)
         {
             using (var stream = typeof(MainWindow).Assembly.GetManifestResourceStream(path))
-            using (var reader = new XmlTextReader(stream))
             {
                 if (stream == null)
                 {
                     throw new InvalidOperationException("Embedded resource not found");
                 }
-                return HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                using (var reader = new XmlTextReader(stream))
+                {
+                    return HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                }
             }
         }
 
