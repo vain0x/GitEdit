@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
-using ICSharpCode.AvalonEdit.Editing;
 using GitEdit.ViewModel;
 
 namespace GitEdit.View.Editor
@@ -23,13 +19,13 @@ namespace GitEdit.View.Editor
         List<CompletionData> CompletionItems { get; } =
             new List<CompletionData>();
 
-        readonly Regex _completionWordRegex =
+        static Regex CompletionWordRegex { get; } =
             new Regex(@"[a-zA-Z_]\w{4,}");
 
         void CollectCompletionWords(string text)
         {
             var items =
-                _completionWordRegex.Matches(text)
+                CompletionWordRegex.Matches(text)
                 .Cast<Match>()
                 .Select(m => m.Value)
                 .Distinct()

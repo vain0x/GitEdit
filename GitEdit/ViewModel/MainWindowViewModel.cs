@@ -1,11 +1,7 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Highlighting;
 using GitEdit.Properties;
 using GitEdit.Utility;
 
@@ -14,9 +10,14 @@ namespace GitEdit.ViewModel
     public class MainWindowViewModel
         : ViewModelBase
     {
+        public ICommand SaveQuitCommand { get; }
+        public ICommand ClearQuitCommand { get; }
+
         public MainWindowViewModel(IMainWindow view)
         {
-            _view = view;
+            View = view;
+            SaveQuitCommand = new RelayCommand(_ => SaveQuit());
+            ClearQuitCommand = new RelayCommand(_ => ClearQuit());
 
             Editor.ModificationIndicatorChanged +=
                 (sender, e) => NotifyPropertyChanged(nameof(Title));
@@ -36,12 +37,12 @@ namespace GitEdit.ViewModel
             }
         }
 
-        private IMainWindow _view;
+        IMainWindow View { get; }
 
-        private ITextEditor Editor =>
-            _view.Editor;
+        ITextEditor Editor =>
+            View.Editor;
 
-        private Rect _rect = Settings.Default.MainWindowRect;
+        Rect _rect = Settings.Default.MainWindowRect;
         public Rect Rect
         {
             get { return _rect; }
@@ -87,28 +88,18 @@ namespace GitEdit.ViewModel
             var currentFileName = Editor.Document?.FileName;
             var fileInfoOrNull =
                 string.IsNullOrEmpty(currentFileName)
-                ? _view.GetSaveFileOrNull()
+                ? View.GetSaveFileOrNull()
                 : new FileInfo(currentFileName);
             if (fileInfoOrNull == null) return;
 
             Editor.SaveFile(fileInfoOrNull);
         }
 
-        private RelayCommand _saveQuitCommand;
-        public ICommand SaveQuitCommand =>
-            _saveQuitCommand
-            ?? (_saveQuitCommand = new RelayCommand(_ => SaveQuit()));
-
         public void SaveQuit()
         {
             Save();
-            _view.Quit();
+            View.Quit();
         }
-
-        private RelayCommand _clearQuitCommand;
-        public ICommand ClearQuitCommand =>
-            _clearQuitCommand
-            ?? (_clearQuitCommand = new RelayCommand(_ => ClearQuit()));
 
         public void ClearQuit()
         {

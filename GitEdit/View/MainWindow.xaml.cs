@@ -60,13 +60,13 @@ namespace GitEdit.View
                 : null;
         }
         
-        private void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             DataContext.Save();
         }
         #endregion
 
-        private void _mainWindow_Drop(object sender, DragEventArgs e)
+        void _mainWindow_Drop(object sender, DragEventArgs e)
         {
             var files =
                 ((string[])e.Data.GetData(DataFormats.FileDrop))
@@ -89,7 +89,7 @@ namespace GitEdit.View
             }
         }
 
-        private void _mainWindow_Closed(object sender, EventArgs e)
+        void _mainWindow_Closed(object sender, EventArgs e)
         {
             var settings = Settings.Default;
             settings.MainWindowRect = new Rect(Left, Top, Width, Height);
