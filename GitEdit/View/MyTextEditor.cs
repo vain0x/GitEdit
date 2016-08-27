@@ -15,7 +15,7 @@ namespace GitEdit.View
         , ITextEditor
     {
         GitEditHighlightingManager HighlightingManager { get; }
-        private CodeCompletion CodeCompletion { get; }
+        CodeCompletion CodeCompletion { get; }
 
         public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {

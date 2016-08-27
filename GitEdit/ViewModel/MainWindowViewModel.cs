@@ -41,12 +41,12 @@ namespace GitEdit.ViewModel
             }
         }
 
-        private IMainWindow View { get; }
+        IMainWindow View { get; }
 
-        private ITextEditor Editor =>
+        ITextEditor Editor =>
             View.Editor;
 
-        private Rect _rect = Settings.Default.MainWindowRect;
+        Rect _rect = Settings.Default.MainWindowRect;
         public Rect Rect
         {
             get { return _rect; }
