@@ -13,30 +13,6 @@ namespace GitEdit.ViewModel
         public ICommand SaveQuitCommand { get; }
         public ICommand ClearQuitCommand { get; }
 
-        public MainWindowViewModel(IMainWindow view)
-        {
-            View = view;
-            SaveQuitCommand = new RelayCommand(_ => SaveQuit());
-            ClearQuitCommand = new RelayCommand(_ => ClearQuit());
-
-            Editor.ModificationIndicatorChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(Title));
-            Editor.Document.FileNameChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(Title));
-            Editor.EncodingChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(EncodingName));
-            Editor.SyntaxHighlightingChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(SyntaxName));
-
-            // Open the given file
-            var args = Environment.GetCommandLineArgs();
-            if (args.Length > 1)
-            {
-                var file = new FileInfo(args[1]);
-                if (file.Exists) { OpenFile(file); }
-            }
-        }
-
         IMainWindow View { get; }
 
         ITextEditor Editor =>
@@ -105,6 +81,30 @@ namespace GitEdit.ViewModel
         {
             Editor.Document.Text = "";
             SaveQuit();
+        }
+
+        public MainWindowViewModel(IMainWindow view)
+        {
+            View = view;
+            SaveQuitCommand = new RelayCommand(_ => SaveQuit());
+            ClearQuitCommand = new RelayCommand(_ => ClearQuit());
+
+            Editor.ModificationIndicatorChanged +=
+                (sender, e) => NotifyPropertyChanged(nameof(Title));
+            Editor.Document.FileNameChanged +=
+                (sender, e) => NotifyPropertyChanged(nameof(Title));
+            Editor.EncodingChanged +=
+                (sender, e) => NotifyPropertyChanged(nameof(EncodingName));
+            Editor.SyntaxHighlightingChanged +=
+                (sender, e) => NotifyPropertyChanged(nameof(SyntaxName));
+
+            // Open the given file
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                var file = new FileInfo(args[1]);
+                if (file.Exists) { OpenFile(file); }
+            }
         }
     }
 

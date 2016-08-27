@@ -17,6 +17,10 @@ namespace GitEdit.View
         GitEditHighlightingManager HighlightingManager { get; }
         CodeCompletion CodeCompletion { get; }
 
+        public event EventHandler ModificationIndicatorChanged;
+        public event EventHandler SyntaxHighlightingChanged;
+        public event EventHandler EncodingChanged;
+
         public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {
             DependencyPropertyDescriptor
@@ -46,10 +50,6 @@ namespace GitEdit.View
 
         bool ITextEditor.IsOriginal =>
             Document.UndoStack.IsOriginalFile;
-
-        public event EventHandler ModificationIndicatorChanged;
-        public event EventHandler SyntaxHighlightingChanged;
-        public event EventHandler EncodingChanged;
 
         public void LoadFile(FileInfo file)
         {
