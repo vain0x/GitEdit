@@ -59,9 +59,8 @@ namespace GitEdit.View.Editor
         {
             var completionWindow = CurrentCompletionWindowOrNull;
             if (completionWindow == null) return;
-
-            completionWindow.Closed -= OnCompletionWindowClosed;
             CurrentCompletionWindowOrNull = null;
+            completionWindow.Closed -= OnCompletionWindowClosed;
         }
 
         void OpenCompletionWindow()
