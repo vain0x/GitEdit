@@ -5,18 +5,58 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitEdit", "GitEdit\GitEdit.csproj", "{6E37739C-2CF6-414F-8829-8094611124A9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{58EDCAD8-718C-4BE0-AB98-EC6A87C93854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.AvalonEdit", "AvalonEdit\ICSharpCode.AvalonEdit\ICSharpCode.AvalonEdit.csproj", "{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Net35 = Debug|Net35
+		Debug|Net40 = Debug|Net40
+		Debug|WithNRefactory = Debug|WithNRefactory
 		Release|Any CPU = Release|Any CPU
+		Release|Net35 = Release|Net35
+		Release|Net40 = Release|Net40
+		Release|WithNRefactory = Release|WithNRefactory
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Net35.ActiveCfg = Debug|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Net35.Build.0 = Debug|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Net40.ActiveCfg = Debug|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|Net40.Build.0 = Debug|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|WithNRefactory.ActiveCfg = Debug|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Debug|WithNRefactory.Build.0 = Debug|Any CPU
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Net35.ActiveCfg = Release|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Net35.Build.0 = Release|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Net40.ActiveCfg = Release|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|Net40.Build.0 = Release|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|WithNRefactory.ActiveCfg = Release|Any CPU
+		{6E37739C-2CF6-414F-8829-8094611124A9}.Release|WithNRefactory.Build.0 = Release|Any CPU
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Any CPU.ActiveCfg = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Any CPU.Build.0 = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net35.ActiveCfg = Debug|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net35.Build.0 = Debug|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net40.ActiveCfg = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|Net40.Build.0 = Debug|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|WithNRefactory.ActiveCfg = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Debug|WithNRefactory.Build.0 = Debug|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Any CPU.ActiveCfg = Release|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net35.ActiveCfg = Release|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net35.Build.0 = Release|Net35
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net40.ActiveCfg = Release|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|Net40.Build.0 = Release|Net40
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|WithNRefactory.ActiveCfg = Release|WithNRefactory
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1}.Release|WithNRefactory.Build.0 = Release|WithNRefactory
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C55B776-26D4-4DB3-A6AB-87E783B2F3D1} = {58EDCAD8-718C-4BE0-AB98-EC6A87C93854}
 	EndGlobalSection
 EndGlobal
