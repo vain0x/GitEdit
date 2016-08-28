@@ -21,6 +21,8 @@ namespace GitEdit.View
                     return HighlightingManager.Instance.GetDefinition(Constant.CommitMessageSyntaxName);
                 case "config":
                     return HighlightingManager.Instance.GetDefinition(Constant.IniSyntaxName);
+                case "exclude":
+                    return HighlightingManager.Instance.GetDefinition(Constant.GitIgnoreSyntaxName);
                 default:
                     return HighlightingManager.Instance.GetDefinitionByExtension(file.Extension);
             }
