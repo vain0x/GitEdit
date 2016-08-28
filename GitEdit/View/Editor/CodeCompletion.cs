@@ -47,10 +47,8 @@ namespace GitEdit.View.Editor
         #endregion
 
         #region Completion items
-        void AddCompletionItemsToList()
+        void AddCompletionItemsTo(CompletionWindow completionWindow)
         {
-            var completionWindow = CurrentCompletionWindowOrNull;
-            if (completionWindow == null) return;
             foreach (var item in CompletionItems)
             {
                 completionWindow.CompletionList.CompletionData.Add(item);
@@ -72,8 +70,7 @@ namespace GitEdit.View.Editor
             var completionWindow = new CompletionWindow(Editor.TextArea);
             CurrentCompletionWindowOrNull = completionWindow;
             completionWindow.Closed += OnCompletionWindowClosed;
-
-            AddCompletionItemsToList();
+            AddCompletionItemsTo(completionWindow);
             completionWindow.Show();
         }
         #endregion
