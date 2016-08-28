@@ -118,6 +118,13 @@ namespace GitEdit.View.Editor
             completionWindow.EndOffset = segment.EndOffset;
             completionWindow.CompletionList.SelectItem(word);
 
+            if (completionWindow.CompletionList.ListBox.Items.Count == 1)
+            {
+                completionWindow.CompletionList.RequestInsertion(EventArgs.Empty);
+                completionWindow.Close();
+                return;
+            }
+
             completionWindow.Show();
         }
         #endregion
