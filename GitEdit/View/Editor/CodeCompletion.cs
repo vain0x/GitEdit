@@ -107,14 +107,15 @@ namespace GitEdit.View.Editor
             if (CurrentCompletionWindowOrNull != null) return;
             var completionWindow = new CompletionWindow(Editor.TextArea);
             CurrentCompletionWindowOrNull = completionWindow;
+
             completionWindow.Closed += OnCompletionWindowClosed;
             completionWindow.ExpectInsertionBeforeStart = true;
+            AddCompletionItemsTo(completionWindow);
 
             var segment = WordSegmentUnderCaret();
             completionWindow.StartOffset = segment.StartOffset;
             completionWindow.EndOffset = segment.EndOffset;
 
-            AddCompletionItemsTo(completionWindow);
             completionWindow.Show();
         }
         #endregion
