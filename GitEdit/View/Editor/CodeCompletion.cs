@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -56,16 +57,21 @@ namespace GitEdit.View.Editor
             }
         }
 
+        void OnCompletionWindowClosed(object sender, EventArgs e)
+        {
+            var completionWindow = CurrentCompletionWindowOrNull;
+            if (completionWindow == null) return;
+
+            completionWindow.Closed -= OnCompletionWindowClosed;
+            CurrentCompletionWindowOrNull = null;
+        }
+
         void InitializeCompletionWindow()
         {
             if (CurrentCompletionWindowOrNull != null) return;
             var completionWindow = new CompletionWindow(Editor.TextArea);
             CurrentCompletionWindowOrNull = completionWindow;
-
-            completionWindow.Closed += (sender, e) =>
-            {
-                CurrentCompletionWindowOrNull = null;
-            };
+            completionWindow.Closed += OnCompletionWindowClosed;
 
             AddCompletionItemsToList();
         }
