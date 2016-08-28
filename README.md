@@ -10,6 +10,19 @@ Simple text editor for Git.
     - ``Ctrl+Space`` to open the window.
 - ``Ctrl+Q`` to save and exit.
 
+## Install
+Download [the latest binary](https://github.com/vain0/git_edit/releases/latest).
+
+Set git_edit as your editor for git:
+
+```
+# To use git_edit for current repository.
+git config --local core.editor "the-unarchived-directory/git_edit.exe"
+
+# To use git_edit for all repositories.
+git config --global core.editor "the-unarchived-directory/git_edit.exe"
+```
+
 ## Libraries
 - [AvalonEdit](https://github.com/icsharpcode/AvalonEdit)
 
