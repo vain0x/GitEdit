@@ -113,8 +113,10 @@ namespace GitEdit.View.Editor
             AddCompletionItemsTo(completionWindow);
 
             var segment = WordSegmentUnderCaret();
+            var word = Editor.Document.GetText(segment);
             completionWindow.StartOffset = segment.StartOffset;
             completionWindow.EndOffset = segment.EndOffset;
+            completionWindow.CompletionList.SelectItem(word);
 
             completionWindow.Show();
         }
