@@ -19,6 +19,10 @@ namespace GitEdit.View
                 case "COMMIT_EDITMSG":
                 case "MERGE_MSG":
                     return HighlightingManager.Instance.GetDefinition(Constant.CommitMessageSyntaxName);
+                case "config":
+                    return HighlightingManager.Instance.GetDefinition(Constant.IniSyntaxName);
+                case "exclude":
+                    return HighlightingManager.Instance.GetDefinition(Constant.GitIgnoreSyntaxName);
                 default:
                     return HighlightingManager.Instance.GetDefinitionByExtension(file.Extension);
             }
