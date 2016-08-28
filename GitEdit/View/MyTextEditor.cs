@@ -1,15 +1,9 @@
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Xml;
 using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using GitEdit.Model;
 using GitEdit.ViewModel;
 using GitEdit.View.Editor;
@@ -20,20 +14,26 @@ namespace GitEdit.View
         : TextEditor
         , ITextEditor
     {
-        private CodeCompletion CodeCompletion { get; }
+        GitEditHighlightingManager HighlightingManager { get; }
+        CodeCompletion CodeCompletion { get; }
+
+        public event EventHandler ModificationIndicatorChanged;
+        public event EventHandler SyntaxHighlightingChanged;
+        public event EventHandler EncodingChanged;
+        public event EventHandler<FileInfo> FileLoaded;
 
         public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {
             DependencyPropertyDescriptor
                 .FromProperty(dp, typeof(TextEditor))
                 .AddValueChanged(this, (sender, e) => raise(e));
-
-            Encoding = new UTF8Encoding();
         }
 
         public MyTextEditor()
         {
+            HighlightingManager = new GitEditHighlightingManager();
             CodeCompletion = new CodeCompletion(this);
+            Encoding = new UTF8Encoding();
 
             ListenPropertyChanged(
                 IsModifiedProperty,
@@ -47,55 +47,24 @@ namespace GitEdit.View
                 EncodingProperty,
                 e => EncodingChanged?.Invoke(this, e)
             );
+
+            FileLoaded += (sender, file) =>
+            {
+                var syntax = HighlightingManager.TryDetectSyntaxHighlighting(file);
+                if (syntax != null) { SyntaxHighlighting = syntax; }
+
+                CodeCompletion.RecollectCompletionWords();
+            };
         }
 
         bool ITextEditor.IsOriginal =>
             Document.UndoStack.IsOriginalFile;
 
-        public event EventHandler ModificationIndicatorChanged;
-        public event EventHandler SyntaxHighlightingChanged;
-        public event EventHandler EncodingChanged;
-
-        #region Syntax highlighting
-        public static void RegisterSyntaxHighlightDefinition(string name, Stream stream, string[] extensions)
-        {
-            if (stream == null) { throw new InvalidOperationException("Embedded resource not found"); }
-
-            using (var reader = new XmlTextReader(stream))
-            {
-                HighlightingManager.Instance.RegisterHighlighting(
-                    name,
-                    extensions,
-                    HighlightingLoader.Load(reader, HighlightingManager.Instance)
-                );
-            }
-        }
-
-        /// <summary>
-        /// Returns the most appropreate syntax definition for given file; or null.
-        /// </summary>
-        static IHighlightingDefinition TryDetectSyntaxHighlighting(FileInfo file)
-        {
-            switch (file.Name)
-            {
-                case "COMMIT_EDITMSG":
-                    return HighlightingManager.Instance.GetDefinition(Constant.CommitMessageSyntaxName);
-                default:
-                    return HighlightingManager.Instance.GetDefinitionByExtension(file.Extension);
-            }
-        }
-        #endregion
-
         public void LoadFile(FileInfo file)
         {
-            base.Load(file.FullName);
+            Load(file.FullName);
             Document.FileName = file.FullName;
-
-            // NOTE: It's better to listen Document.FileNameChanged and set syntax.
-            var syntax = TryDetectSyntaxHighlighting(file);
-            if (syntax != null) { SyntaxHighlighting = syntax; }
-
-            CodeCompletion.RecollectCompletionWords();
+            FileLoaded?.Invoke(this, file);
         }
 
         public void SaveFile(FileInfo file)
@@ -104,7 +73,7 @@ namespace GitEdit.View
             {
                 using (var stream = tempFile.OpenWrite())
                 {
-                    base.Save(stream);
+                    Save(stream);
                 }
             });
             Document.FileName = file.FullName;

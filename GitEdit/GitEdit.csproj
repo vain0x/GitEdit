@@ -26,15 +26,15 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FSharp.Core, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -59,6 +59,7 @@
     <Compile Include="ViewModel\CompletionData.cs" />
     <Compile Include="ViewModel\ITextEditor.cs" />
     <Compile Include="View\Editor\CodeCompletion.cs" />
+    <Compile Include="View\GitEditHighlightingManager.cs" />
     <Compile Include="View\MyTextEditor.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="Utility\ViewModelBase.cs" />

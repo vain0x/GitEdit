@@ -1,21 +1,16 @@
 ﻿using System;
-using System.IO;
-using System.Xml;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Highlighting;
-using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 namespace GitEdit.ViewModel
 {
     public static class Constant
     {
-        public static string AppName = "GitEdit";
+        public static string AppName => "GitEdit";
 
-        public static string CommitMessageSyntaxName = "CommitMessage";
-        public static string GitIgnoreSyntaxName = "GitIgnore";
-        public static string IniSyntaxName = "Ini";
+        public static string CommitMessageSyntaxName => "CommitMessage";
+        public static string GitIgnoreSyntaxName => "GitIgnore";
+        public static string IniSyntaxName => "Ini";
 
-        public static Tuple<string, string[]>[] SyntaxDefinitions =
+        public static Tuple<string, string[]>[] SyntaxDefinitions =>
             new[]
             {
                 Tuple.Create(CommitMessageSyntaxName, new string[] { }),
