@@ -66,7 +66,7 @@ namespace GitEdit.View.Editor
             CurrentCompletionWindowOrNull = null;
         }
 
-        void InitializeCompletionWindow()
+        void OpenCompletionWindow()
         {
             if (CurrentCompletionWindowOrNull != null) return;
             var completionWindow = new CompletionWindow(Editor.TextArea);
@@ -74,13 +74,7 @@ namespace GitEdit.View.Editor
             completionWindow.Closed += OnCompletionWindowClosed;
 
             AddCompletionItemsToList();
-        }
-
-        void OpenCompletionWindow()
-        {
-            if (CurrentCompletionWindowOrNull != null) return;
-            InitializeCompletionWindow();
-            CurrentCompletionWindowOrNull.Show();
+            completionWindow.Show();
         }
         #endregion
 
