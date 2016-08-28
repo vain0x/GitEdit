@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
+using ICSharpCode.AvalonEdit.Document;
 using GitEdit.ViewModel;
 
 namespace GitEdit.View.Editor
@@ -44,6 +45,44 @@ namespace GitEdit.View.Editor
         }
         #endregion
 
+        #region Document
+        bool IsIdentifierChar(char @char)
+        {
+            return @char == '_' || char.IsLetterOrDigit(@char);
+        }
+
+        TextSegment WordSegmentUnderCaret()
+        {
+            var textArea = Editor.TextArea;
+            var document = Editor.Document;
+
+            var caretOffset = textArea.Caret.Offset;
+            var location = document.GetLocation(caretOffset);
+            var lineOffset = document.GetOffset(location.Line, 0);
+            var line = document.GetLineByNumber(location.Line);
+            var lineText = document.GetText(lineOffset, line.TotalLength);
+
+            var wordOffsetBegin = caretOffset - lineOffset;
+            while (0 < wordOffsetBegin && IsIdentifierChar(lineText[wordOffsetBegin - 1]))
+            {
+                wordOffsetBegin--;
+            }
+
+            var wordOffsetEnd = caretOffset - lineOffset;
+            while (wordOffsetEnd < lineText.Length && IsIdentifierChar(lineText[wordOffsetEnd]))
+            {
+                wordOffsetEnd++;
+            }
+
+            return
+                new TextSegment()
+                {
+                    StartOffset = lineOffset + wordOffsetBegin,
+                    EndOffset = lineOffset + wordOffsetEnd
+                };
+        }
+        #endregion
+
         #region Completion window
         CompletionWindow CurrentCompletionWindowOrNull { get; set; }
 
@@ -69,6 +108,11 @@ namespace GitEdit.View.Editor
             var completionWindow = new CompletionWindow(Editor.TextArea);
             CurrentCompletionWindowOrNull = completionWindow;
             completionWindow.Closed += OnCompletionWindowClosed;
+
+            var segment = WordSegmentUnderCaret();
+            completionWindow.StartOffset = segment.StartOffset;
+            completionWindow.EndOffset = segment.EndOffset;
+
             AddCompletionItemsTo(completionWindow);
             completionWindow.Show();
         }
