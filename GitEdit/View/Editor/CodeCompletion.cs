@@ -14,8 +14,6 @@ namespace GitEdit.View.Editor
     {
         TextEditor Editor { get; }
 
-        CompletionWindow CurrentCompletionWindowOrNull { get; set; }
-
         #region Collect completion words
         List<CompletionData> CompletionItems { get; } =
             new List<CompletionData>();
@@ -46,7 +44,9 @@ namespace GitEdit.View.Editor
         }
         #endregion
 
-        #region Completion items
+        #region Completion window
+        CompletionWindow CurrentCompletionWindowOrNull { get; set; }
+
         void AddCompletionItemsTo(CompletionWindow completionWindow)
         {
             foreach (var item in CompletionItems)
