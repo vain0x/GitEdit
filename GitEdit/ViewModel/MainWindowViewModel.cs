@@ -10,8 +10,8 @@ namespace GitEdit.ViewModel
     public class MainWindowViewModel
         : ViewModelBase
     {
-        public ICommand SaveQuitCommand { get; }
-        public ICommand ClearQuitCommand { get; }
+        public ICommand CompleteCommand { get; }
+        public ICommand AbortCommand { get; }
 
         IMainWindow View { get; }
 
@@ -87,8 +87,8 @@ namespace GitEdit.ViewModel
         public MainWindowViewModel(IMainWindow view)
         {
             View = view;
-            SaveQuitCommand = new RelayCommand(_ => SaveQuit());
-            ClearQuitCommand = new RelayCommand(_ => ClearQuit());
+            CompleteCommand = new RelayCommand(_ => SaveQuit());
+            AbortCommand = new RelayCommand(_ => ClearQuit());
 
             Editor.ModificationIndicatorChanged +=
                 (sender, e) => NotifyPropertyChanged(nameof(Title));
