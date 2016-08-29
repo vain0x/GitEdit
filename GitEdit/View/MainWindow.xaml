@@ -57,8 +57,8 @@
                 <StatusBarItem Content="{Binding EncodingName}" />
             </StatusBar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Abort" Command="{Binding ClearQuitCommand}" />
-                <Button Content="Complete" Command="{Binding SaveQuitCommand}" ToolTip="Ctrl+Q" />
+                <Button Content="Abort" Command="{Binding ClearQuitCommand}" ToolTip="Ctrl+Shift+W" />
+                <Button Content="Complete" Command="{Binding SaveQuitCommand}" ToolTip="Ctrl+W" />
             </StackPanel>
         </Grid>
     </Grid>
