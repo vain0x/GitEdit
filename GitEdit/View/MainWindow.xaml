@@ -27,7 +27,8 @@
             />
     </Window.CommandBindings>
     <Window.InputBindings>
-        <KeyBinding Gesture="Ctrl+Q" Command="{Binding SaveQuitCommand}" />
+        <KeyBinding Gesture="Ctrl+W" Command="{Binding SaveQuitCommand}" />
+        <KeyBinding Gesture="Ctrl+Shift+W" Command="{Binding ClearQuitCommand}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>

@@ -8,7 +8,9 @@ Simple text editor for Git.
     - `.gitignore`
 - Input completion:
     - ``Ctrl+Space`` to open the window.
-- ``Ctrl+Q`` to save and exit.
+- Optimized commands for Git:
+    - ``Ctrl+W`` to save and exit.
+    - ``Ctrl+Shift+W`` to clear all, save and exit. (To cancel commit, rebase, etc.)
 
 ## Install
 Download [the latest binary](https://github.com/vain0/git_edit/releases/latest).
