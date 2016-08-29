@@ -4,10 +4,10 @@ Simple text editor for Git.
 ## Features
 - Quick launch.
 - Syntax highlighting:
-    - `COMMIT_EDITMSG` with diff (See ``git commit -v``).
-    - `.gitignore`
+    - `COMMIT_EDITMSG` with diff (See ``git commit -v``),
+    - `.gitignore`, etc.
 - Input completion:
-    - ``Ctrl+Space`` to open the window.
+    - ``Ctrl+Space`` to try complete.
 - Optimized commands for Git:
     - ``Ctrl+W`` to save and exit.
     - ``Ctrl+Shift+W`` to clear all, save and exit. (To cancel commit, rebase, etc.)
