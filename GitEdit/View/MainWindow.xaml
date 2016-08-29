@@ -28,7 +28,7 @@
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Gesture="Ctrl+W" Command="{Binding SaveQuitCommand}" />
-        <KeyBinding Gesture="Ctrl+Shift+W" Command="{Binding ClearQuitCommand}" />
+        <KeyBinding Gesture="Ctrl+Shift+W" Command="{Binding AbortCommand}" />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -57,7 +57,7 @@
                 <StatusBarItem Content="{Binding EncodingName}" />
             </StatusBar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Abort" Command="{Binding ClearQuitCommand}" ToolTip="Ctrl+Shift+W" />
+                <Button Content="Abort" Command="{Binding AbortCommand}" ToolTip="Ctrl+Shift+W" />
                 <Button Content="Complete" Command="{Binding SaveQuitCommand}" ToolTip="Ctrl+W" />
             </StackPanel>
         </Grid>
