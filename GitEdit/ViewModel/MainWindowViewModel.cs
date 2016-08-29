@@ -59,21 +59,22 @@ namespace GitEdit.ViewModel
             Editor.LoadFile(file);
         }
 
-        public void Save()
+        public Result Save()
         {
             var currentFileName = Editor.Document?.FileName;
             var fileInfoOrNull =
                 string.IsNullOrEmpty(currentFileName)
                 ? View.GetSaveFileOrNull()
                 : new FileInfo(currentFileName);
-            if (fileInfoOrNull == null) return;
+            if (fileInfoOrNull == null) return Result.Failure;
 
             Editor.SaveFile(fileInfoOrNull);
+            return Result.Success;
         }
 
         public void SaveQuit()
         {
-            Save();
+            if (Save() != Result.Success) return;
             View.Quit();
         }
 
