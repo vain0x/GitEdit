@@ -102,13 +102,19 @@ namespace GitEdit.View
             completionWindow.Closed -= OnCompletionWindowClosed;
         }
 
-        void OpenCompletionWindow()
+        void ShowCompletionWindow(CompletionWindow completionWindow)
         {
             if (CurrentCompletionWindowOrNull != null) return;
-            var completionWindow = new CompletionWindow(Editor.TextArea);
             CurrentCompletionWindowOrNull = completionWindow;
-
             completionWindow.Closed += OnCompletionWindowClosed;
+            completionWindow.Show();
+        }
+
+        CompletionWindow TryNewCompletionWindow()
+        {
+            if (CurrentCompletionWindowOrNull != null) return null;
+
+            var completionWindow = new CompletionWindow(Editor.TextArea);
             AddCompletionItemsTo(completionWindow);
 
             var segment = WordSegmentUnderCaret();
@@ -117,14 +123,35 @@ namespace GitEdit.View
             completionWindow.EndOffset = segment.EndOffset;
             completionWindow.CompletionList.SelectItem(word);
 
-            if (completionWindow.CompletionList.ListBox.Items.Count == 1)
+            return completionWindow;
+        }
+
+        void ShowSuggestions()
+        {
+            var completionWindow = TryNewCompletionWindow();
+            if (completionWindow == null) return;
+
+            var suggestionCount = completionWindow.CompletionList.ListBox.Items.Count;
+            if (suggestionCount > 0)
+            {
+                ShowCompletionWindow(completionWindow);
+            }
+        }
+
+        void TryComplete()
+        {
+            var completionWindow = TryNewCompletionWindow();
+            if (completionWindow == null) return;
+
+            var suggestionCount = completionWindow.CompletionList.ListBox.Items.Count;
+            if (suggestionCount == 1)
             {
                 completionWindow.CompletionList.RequestInsertion(EventArgs.Empty);
-                completionWindow.Close();
-                return;
             }
-
-            completionWindow.Show();
+            else
+            {
+                ShowCompletionWindow(completionWindow);
+            }
         }
         #endregion
 
@@ -136,8 +163,21 @@ namespace GitEdit.View
             {
                 if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control) && e.Key == Key.Space)
                 {
-                    OpenCompletionWindow();
+                    TryComplete();
                     e.Handled = true;
+                }
+            };
+
+            Editor.Document.UpdateFinished += (sender, e) =>
+            {
+                var wordSegment = WordSegmentUnderCaret();
+                if (wordSegment.Length == 0)
+                {
+                    CurrentCompletionWindowOrNull?.Close();
+                }
+                else if (wordSegment.Length == 3)
+                {
+                    ShowSuggestions();
                 }
             };
         }
