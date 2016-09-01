@@ -9,7 +9,7 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using GitEdit.ViewModel;
 
-namespace GitEdit.View.Editor
+namespace GitEdit.View
 {
     public class CodeCompletion
     {
