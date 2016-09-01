@@ -6,7 +6,6 @@ using System.Windows;
 using ICSharpCode.AvalonEdit;
 using GitEdit.Model;
 using GitEdit.ViewModel;
-using GitEdit.View.Editor;
 
 namespace GitEdit.View
 {
