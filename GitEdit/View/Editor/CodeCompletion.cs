@@ -155,31 +155,41 @@ namespace GitEdit.View
         }
         #endregion
 
+        #region Editor evet handlers
+        void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control) && e.Key == Key.Space)
+            {
+                TryComplete();
+                e.Handled = true;
+            }
+        }
+
+        void OnDocumentUpdateFinished(object sender, EventArgs e)
+        {
+            var wordSegment = WordSegmentUnderCaret();
+            if (wordSegment.Length == 0)
+            {
+                CurrentCompletionWindowOrNull?.Close();
+            }
+            else if (wordSegment.Length == 3)
+            {
+                ShowSuggestions();
+            }
+        }
+
+        void AttachEvents()
+        {
+            Editor.KeyDown += OnKeyDown;
+            Editor.Document.UpdateFinished += OnDocumentUpdateFinished;
+        }
+        #endregion
+
         public CodeCompletion(TextEditor editor)
         {
             Editor = editor;
 
-            Editor.KeyDown += (sender, e) =>
-            {
-                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control) && e.Key == Key.Space)
-                {
-                    TryComplete();
-                    e.Handled = true;
-                }
-            };
-
-            Editor.Document.UpdateFinished += (sender, e) =>
-            {
-                var wordSegment = WordSegmentUnderCaret();
-                if (wordSegment.Length == 0)
-                {
-                    CurrentCompletionWindowOrNull?.Close();
-                }
-                else if (wordSegment.Length == 3)
-                {
-                    ShowSuggestions();
-                }
-            };
+            AttachEvents();
         }
     }
 }
