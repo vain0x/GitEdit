@@ -29,7 +29,7 @@ namespace GitEdit.View
                 .Cast<Match>()
                 .Select(m => m.Value)
                 .Distinct()
-                .Select(word => new CompletionData() { Text = word });
+                .Select(word => new CompletionData(word));
 
             CompletionItems.AddRange(items);
         }
