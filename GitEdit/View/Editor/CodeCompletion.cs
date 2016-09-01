@@ -109,7 +109,6 @@ namespace GitEdit.View.Editor
             CurrentCompletionWindowOrNull = completionWindow;
 
             completionWindow.Closed += OnCompletionWindowClosed;
-            completionWindow.ExpectInsertionBeforeStart = true;
             AddCompletionItemsTo(completionWindow);
 
             var segment = WordSegmentUnderCaret();
