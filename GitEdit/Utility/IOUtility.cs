@@ -22,10 +22,10 @@ namespace GitEdit.Model
                 self.DeleteIfExists();
                 tempFile.MoveTo(self.FullName);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 tempFile.DeleteIfExists();
-                throw e;
+                throw;
             }
         }
     }
