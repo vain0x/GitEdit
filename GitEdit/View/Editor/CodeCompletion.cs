@@ -136,6 +136,10 @@ namespace GitEdit.View
             {
                 ShowCompletionWindow(completionWindow);
             }
+            else
+            {
+                completionWindow.Close();
+            }
         }
 
         void TryComplete()
@@ -147,6 +151,7 @@ namespace GitEdit.View
             if (suggestionCount == 1)
             {
                 completionWindow.CompletionList.RequestInsertion(EventArgs.Empty);
+                completionWindow.Close();
             }
             else
             {
