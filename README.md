@@ -1,4 +1,4 @@
-# git_edit
+# GitEdit
 Simple text editor for Git.
 
 ## Features
@@ -13,16 +13,16 @@ Simple text editor for Git.
     - ``Ctrl+Shift+W`` to clear all, save and exit. (To cancel commit, rebase, etc.)
 
 ## Install
-Download [the latest binary](https://github.com/vain0/git_edit/releases/latest).
+Download [the latest binary](https://github.com/vain0/GitEdit/releases/latest).
 
-Set git_edit as your editor for git:
+Set GitEdit as your editor for git:
 
 ```
-# To use git_edit for current repository.
-git config --local core.editor "the-unarchived-directory/git_edit.exe"
+# To use GitEdit for current repository.
+git config --local core.editor "the-unarchived-directory/GitEdit.exe"
 
-# To use git_edit for all repositories.
-git config --global core.editor "the-unarchived-directory/git_edit.exe"
+# To use GitEdit for all repositories.
+git config --global core.editor "the-unarchived-directory/GitEdit.exe"
 ```
 
 ## Libraries
