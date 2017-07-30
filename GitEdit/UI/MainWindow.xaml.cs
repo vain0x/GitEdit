@@ -83,6 +83,17 @@ namespace GitEdit.UI
         }
         #endregion
 
+        void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            // Open the given file.
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                var file = new FileInfo(args[1]);
+                if (file.Exists) DataContext.OpenFile(file);
+            }
+        }
+
         void OnDrop(object sender, DragEventArgs e)
         {
             var files =
@@ -90,7 +101,7 @@ namespace GitEdit.UI
                 .Select(path => new FileInfo(path))
                 .ToArray();
 
-            if (files.Length == 1 && Editor.IsOriginal)
+            if (files.Length == 1 && !editor.IsModified)
             {
                 DataContext.OpenFile(files[0]);
             }

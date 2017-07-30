@@ -4,9 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
     xmlns:editors="clr-namespace:GitEdit.UI.Editors"
-    Title="{Binding Title}"
+    Title="{Binding Editor.Title}"
     AllowDrop="True"
     Drop="OnDrop"
+    Loaded="OnLoaded"
     Closed="OnClosed"
     >
     <Window.Resources>
@@ -44,6 +45,10 @@
         <editors:MyTextEditor
             x:Name="editor"
             Margin="5"
+            Document="{Binding Editor.Document, Mode=TwoWay}"
+            IsModified="{Binding Editor.IsModified, Mode=OneWayToSource}"
+            SyntaxHighlighting="{Binding Editor.SyntaxHighlighting, Mode=OneWayToSource}"
+            Encoding="{Binding Editor.Encoding, Mode=TwoWay}"
             FontFamily="{Binding FontFamily}"
             FontSize="{Binding FontSize}"
             ShowLineNumbers="True"
@@ -63,8 +68,8 @@
 
         <Grid Grid.Row="1">
             <StatusBar>
-                <StatusBarItem Content="{Binding SyntaxName}" />
-                <StatusBarItem Content="{Binding EncodingName}" />
+                <StatusBarItem Content="{Binding Editor.SyntaxName}" />
+                <StatusBarItem Content="{Binding Editor.EncodingName}" />
             </StatusBar>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

@@ -11,42 +11,10 @@ namespace GitEdit.UI.Editors
         : TextEditor
         , ITextEditor
     {
+        public event EventHandler FileNameChanged;
+
         GitEditHighlightingManager HighlightingManager { get; }
         CodeCompletion CodeCompletion { get; }
-
-        public event EventHandler ModificationIndicatorChanged;
-        public event EventHandler SyntaxHighlightingChanged;
-        public event EventHandler EncodingChanged;
-
-        public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
-        {
-            DependencyPropertyDescriptor
-                .FromProperty(dp, typeof(TextEditor))
-                .AddValueChanged(this, (sender, e) => raise(e));
-        }
-
-        public MyTextEditor()
-        {
-            HighlightingManager = new GitEditHighlightingManager();
-            CodeCompletion = new CodeCompletion(this);
-            Encoding = new UTF8Encoding();
-
-            ListenPropertyChanged(
-                IsModifiedProperty,
-                e => ModificationIndicatorChanged?.Invoke(this, e)
-            );
-            ListenPropertyChanged(
-                SyntaxHighlightingProperty,
-                e => SyntaxHighlightingChanged?.Invoke(this, e)
-            );
-            ListenPropertyChanged(
-                EncodingProperty,
-                e => EncodingChanged?.Invoke(this, e)
-            );
-        }
-
-        bool ITextEditor.IsOriginal =>
-            Document.UndoStack.IsOriginalFile;
 
         void OnFileLoaded(FileInfo file)
         {
@@ -59,7 +27,10 @@ namespace GitEdit.UI.Editors
         public void LoadFile(FileInfo file)
         {
             Load(file.FullName);
+
             Document.FileName = file.FullName;
+            FileNameChanged?.Invoke(this, EventArgs.Empty);
+
             OnFileLoaded(file);
         }
 
@@ -72,6 +43,14 @@ namespace GitEdit.UI.Editors
             }
 
             Document.FileName = file.FullName;
+            FileNameChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public MyTextEditor()
+        {
+            HighlightingManager = new GitEditHighlightingManager();
+            CodeCompletion = new CodeCompletion(this);
+            Encoding = new UTF8Encoding();
         }
     }
 }

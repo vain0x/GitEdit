@@ -17,35 +17,13 @@ namespace GitEdit.UI
 
         IMainWindow View { get; }
 
-        ITextEditor Editor =>
-            View.Editor;
+        public TextEditorViewModel Editor { get; }
 
         public string FontFamily =>
             Settings.Default.FontFamily;
 
         public int FontSize =>
             Settings.Default.FontSize;
-
-        public string Title
-        {
-            get
-            {
-                var currentFileName = Editor.Document?.FileName;
-                var fileName =
-                    string.IsNullOrEmpty(currentFileName)
-                    ? "untitled"
-                    : Path.GetFileName(currentFileName);
-                var indicator =
-                    Editor.IsOriginal ? "" : " *";
-                return string.Format("{0}{1} | {2}", fileName, indicator, App.Name);
-            }
-        }
-
-        public string SyntaxName =>
-            Editor.SyntaxHighlighting?.Name ?? "Plain text";
-
-        public string EncodingName =>
-            Editor.Encoding?.EncodingName ?? "No encoding";
 
         public void OpenFile(FileInfo file)
         {
@@ -94,29 +72,14 @@ namespace GitEdit.UI
         public MainWindowViewModel(IMainWindow view)
         {
             View = view;
+            Editor = new TextEditorViewModel(view.Editor);
+
             CompleteCommand =
                 new DelegateCommand<string>(parameter =>
                     SaveQuit(
                         (EncodingType)Enum.Parse(typeof(EncodingType), parameter)
                     ));
             AbortCommand = new DelegateCommand<object>(_ => ClearQuit());
-
-            Editor.ModificationIndicatorChanged +=
-                (sender, e) => RaisePropertyChanged(nameof(Title));
-            Editor.Document.FileNameChanged +=
-                (sender, e) => RaisePropertyChanged(nameof(Title));
-            Editor.EncodingChanged +=
-                (sender, e) => RaisePropertyChanged(nameof(EncodingName));
-            Editor.SyntaxHighlightingChanged +=
-                (sender, e) => RaisePropertyChanged(nameof(SyntaxName));
-
-            // Open the given file
-            var args = Environment.GetCommandLineArgs();
-            if (args.Length > 1)
-            {
-                var file = new FileInfo(args[1]);
-                if (file.Exists) { OpenFile(file); }
-            }
         }
     }
 

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace GitEdit.UI.Editors
@@ -9,18 +10,9 @@ namespace GitEdit.UI.Editors
     public interface ITextEditor
         : ITextEditorComponent
     {
-        /// <summary>
-        /// Gets whether the document has no modification.
-        /// </summary>
-        bool IsOriginal { get; }
+        event EventHandler FileNameChanged;
 
-        event EventHandler ModificationIndicatorChanged;
-        event EventHandler SyntaxHighlightingChanged;
-        event EventHandler EncodingChanged;
-
-        IHighlightingDefinition SyntaxHighlighting { get; }
-        Encoding Encoding { get; set; }
-
+        void Clear();
         void SaveFile(FileInfo file);
         void LoadFile(FileInfo file);
     }

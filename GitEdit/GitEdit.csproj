@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="UI\Editors\Completing\CompletionData.cs" />
+    <Compile Include="UI\Editors\TextEditorViewModel.cs" />
     <Compile Include="Utility\EncodingType.cs" />
     <Compile Include="UI\Editors\ITextEditor.cs" />
     <Compile Include="UI\Editors\Completing\CodeCompletion.cs" />
