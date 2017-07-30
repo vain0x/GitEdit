@@ -48,7 +48,7 @@ namespace GitEdit.View
             foreach (var def in Constant.SyntaxDefinitions)
             {
                 var name = def.Item1;
-                var path = string.Format("GitEdit.Resource.SyntaxHighlighting.{0}.xshd", name);
+                var path = string.Format("GitEdit.Resources.SyntaxHighlighting.{0}.xshd", name);
 
                 HighlightingManager.Instance.RegisterHighlighting(
                     name,

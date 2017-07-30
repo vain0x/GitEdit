@@ -103,9 +103,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <EmbeddedResource Include="Resource\SyntaxHighlighting\CommitMessage.xshd" />
-    <EmbeddedResource Include="Resource\SyntaxHighlighting\Ini.xshd" />
-    <EmbeddedResource Include="Resource\SyntaxHighlighting\GitIgnore.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\CommitMessage.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\Ini.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\GitIgnore.xshd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
