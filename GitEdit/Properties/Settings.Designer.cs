@@ -25,7 +25,7 @@ namespace GitEdit.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Myrica M,MS Gothic,Consolas")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Consolas,Myrica M,MS Gothic")]
         public string FontFamily {
             get {
                 return ((string)(this["FontFamily"]));
