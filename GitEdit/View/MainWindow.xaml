@@ -27,7 +27,11 @@
             />
     </Window.CommandBindings>
     <Window.InputBindings>
-        <KeyBinding Gesture="Ctrl+W" Command="{Binding CompleteCommand}" />
+        <KeyBinding
+            Gesture="Ctrl+W"
+            Command="{Binding CompleteCommand}"
+            CommandParameter="Default"
+            />
         <KeyBinding Gesture="Ctrl+Shift+W" Command="{Binding AbortCommand}" />
     </Window.InputBindings>
     <Grid>
@@ -61,7 +65,22 @@
             </StatusBar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Abort" Command="{Binding AbortCommand}" ToolTip="Ctrl+Shift+W" />
-                <Button Content="Complete" Command="{Binding CompleteCommand}" ToolTip="Ctrl+W" />
+                <Button
+                    Content="Complete"
+                    Command="{Binding CompleteCommand}"
+                    CommandParameter="Default"
+                    ToolTip="Ctrl+W"
+                    >
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem 
+                                Header="In UTF8"
+                                Command="{Binding CompleteCommand}"
+                                CommandParameter="Utf8"
+                                />
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>
