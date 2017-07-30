@@ -48,6 +48,7 @@
                     CutCopyWholeLine="False"
                     HighlightCurrentLine="True"
                     ShowTabs="True"
+                    ShowSpaces="True"
                     ConvertTabsToSpaces="True"
                     IndentationSize="4"
                     />
