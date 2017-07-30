@@ -11,12 +11,14 @@ namespace GitEdit.UI.Editors
         #region SyntaxDefinitions
         public const string CommitMessageSyntaxName = "CommitMessage";
         public const string GitIgnoreSyntaxName = "GitIgnore";
+        public const string RebaseTodoSyntaxName = "RebaseTodo";
         public const string IniSyntaxName = "Ini";
 
         public static Tuple<string, string[]>[] SyntaxDefinitions =>
             new[]
             {
                 Tuple.Create(CommitMessageSyntaxName, new string[] { }),
+                Tuple.Create(RebaseTodoSyntaxName, new string[] { }),
                 Tuple.Create(GitIgnoreSyntaxName, new[] { ".gitignore" }),
                 Tuple.Create(IniSyntaxName, new[] { ".ini", ".cfg", ".gitconfig" }),
             };
@@ -32,6 +34,8 @@ namespace GitEdit.UI.Editors
                 case "COMMIT_EDITMSG":
                 case "MERGE_MSG":
                     return HighlightingManager.Instance.GetDefinition(CommitMessageSyntaxName);
+                case "git-rebase-todo":
+                    return HighlightingManager.Instance.GetDefinition(RebaseTodoSyntaxName);
                 case "config":
                     return HighlightingManager.Instance.GetDefinition(IniSyntaxName);
                 case "exclude":

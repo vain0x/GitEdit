@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition
+    name="RebaseTodo"
+    xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008"
+    >
+    <Color name="Comment" foreground="Gray" />
+    <Color name="ActionKeyword" foreground="Blue" />
+    <Color name="DestructiveActionKeyword" foreground="Red" />
+
+    <RuleSet>
+        <Span color="Comment" begin="^#" />
+        <Rule color="ActionKeyword">^(pick|p|reword|r|edit|e|squash|s|fixup|f|exec|x)\b</Rule>
+        <Rule color="DestructiveActionKeyword">^(drop|d)\b</Rule>
+    </RuleSet>
+</SyntaxDefinition>

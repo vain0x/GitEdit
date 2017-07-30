@@ -19,7 +19,7 @@ namespace GitEdit.UI.Editors
             Task.FromResult(new CompletionData[0]);
 
         static Regex CompletionWordRegex { get; } =
-            new Regex(@"[a-zA-Z_-][\w-]{4,}", RegexOptions.Compiled);
+            new Regex(@"[a-zA-Z_-][\w-]{4,}(?<!-)", RegexOptions.Compiled);
 
         CompletionData[] CollectCompletionWords(string text)
         {

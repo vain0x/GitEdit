@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using GitEdit.Properties;
 using GitEdit.UI.Editors;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Document;
 using Microsoft.Win32;
 
 namespace GitEdit.UI
@@ -28,27 +29,6 @@ namespace GitEdit.UI
     public partial class MainWindow
         : Window
     {
-        sealed class SaveFileChooser
-            : ISaveFileChooser
-        {
-            MainWindow Window { get; }
-
-            public FileInfo GetSaveFileOrNull()
-            {
-                var sfd = new SaveFileDialog();
-                var result = sfd.ShowDialog(Window);
-                return
-                    result.HasValue && result.Value
-                    ? new FileInfo(sfd.FileName)
-                    : null;
-            }
-
-            public SaveFileChooser(MainWindow window)
-            {
-                Window = window;
-            }
-        }
-
         public new MainWindowViewModel DataContext =>
             (MainWindowViewModel)base.DataContext;
 
@@ -67,38 +47,27 @@ namespace GitEdit.UI
             }
         }
 
-        public MainWindow()
+        void LoadInitialFile()
         {
-            InitializeComponent();
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                var file = new FileInfo(args[1]);
 
-            var saveFileChooser = new SaveFileChooser(this);
-            var dataContext = new MainWindowViewModel(saveFileChooser);
-            base.DataContext = dataContext;
-
-            dataContext.QuitRequested += (sender, e) => Close();
-
-            dataContext.Editor.FileLoadRequested += (sender, e) => editor.LoadFile(e);
-            dataContext.Editor.FileSaveRequested += (sender, e) => editor.SaveFile(e);
-
-            Rect = Settings.Default.MainWindowRect;
-
-            editor.Focus();
+                try
+                {
+                    editor.LoadFile(file);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"Couldn't load file: '{file.FullName}'.", App.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         void OnSaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             DataContext.TrySave();
-        }
-
-        void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            // Open the given file.
-            var args = Environment.GetCommandLineArgs();
-            if (args.Length > 1)
-            {
-                var file = new FileInfo(args[1]);
-                if (file.Exists) DataContext.OpenFile(file);
-            }
         }
 
         void OnDrop(object sender, DragEventArgs e)
@@ -134,6 +103,29 @@ namespace GitEdit.UI
         void OnEditorFileNameChanged(object sender, EventArgs e)
         {
             DataContext.Editor.OnFileNameChanged();
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            var document = new TextDocument();
+            editor.Document = document;
+
+            var saveFileChooser = new GuiSaveFileChooser(this);
+            var dataContext = new MainWindowViewModel(document, saveFileChooser);
+            base.DataContext = dataContext;
+
+            dataContext.QuitRequested += (sender, e) => Close();
+
+            dataContext.Editor.FileLoadRequested += (sender, e) => editor.LoadFile(e);
+            dataContext.Editor.FileSaveRequested += (sender, e) => editor.SaveFile(e);
+
+            Rect = Settings.Default.MainWindowRect;
+
+            editor.Focus();
+
+            LoadInitialFile();
         }
     }
 }
