@@ -66,13 +66,12 @@ namespace GitEdit.UI.Editors
 
         public void SaveFile(FileInfo file)
         {
-            file.UpdateSafely(tempFile =>
+            using (var stream = file.OpenWrite())
             {
-                using (var stream = tempFile.OpenWrite())
-                {
-                    Save(stream);
-                }
-            });
+                stream.SetLength(0);
+                Save(stream);
+            }
+
             Document.FileName = file.FullName;
         }
     }
