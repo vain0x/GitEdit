@@ -10,7 +10,7 @@ namespace GitEdit.Mvvm
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             Debug.Assert(propertyName != null);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -21,7 +21,7 @@ namespace GitEdit.Mvvm
             if (EqualityComparer<X>.Default.Equals(field, value)) return;
 
             field = value;
-            NotifyPropertyChanged(propertyName);
+            RaisePropertyChanged(propertyName);
         }
     }
 }

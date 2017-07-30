@@ -111,13 +111,13 @@ namespace GitEdit.UI
             AbortCommand = new DelegateCommand<object>(_ => ClearQuit());
 
             Editor.ModificationIndicatorChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(Title));
+                (sender, e) => RaisePropertyChanged(nameof(Title));
             Editor.Document.FileNameChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(Title));
+                (sender, e) => RaisePropertyChanged(nameof(Title));
             Editor.EncodingChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(EncodingName));
+                (sender, e) => RaisePropertyChanged(nameof(EncodingName));
             Editor.SyntaxHighlightingChanged +=
-                (sender, e) => NotifyPropertyChanged(nameof(SyntaxName));
+                (sender, e) => RaisePropertyChanged(nameof(SyntaxName));
 
             // Open the given file
             var args = Environment.GetCommandLineArgs();
