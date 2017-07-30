@@ -104,13 +104,11 @@ namespace GitEdit.UI
         {
             View = view;
             CompleteCommand =
-                new DelegateCommand(parameter =>
+                new DelegateCommand<string>(parameter =>
                     SaveQuit(
-                        (EncodingType)Enum.Parse(
-                            typeof(EncodingType),
-                            (string)parameter
-                        )));
-            AbortCommand = new DelegateCommand(_ => ClearQuit());
+                        (EncodingType)Enum.Parse(typeof(EncodingType), parameter)
+                    ));
+            AbortCommand = new DelegateCommand<object>(_ => ClearQuit());
 
             Editor.ModificationIndicatorChanged +=
                 (sender, e) => NotifyPropertyChanged(nameof(Title));

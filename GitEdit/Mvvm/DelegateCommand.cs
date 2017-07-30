@@ -4,18 +4,18 @@ using System.Windows.Input;
 
 namespace GitEdit.Mvvm
 {
-    public class DelegateCommand
+    public class DelegateCommand<TParameter>
         : ICommand
     {
-        readonly Action<object> _execute;
-        readonly Predicate<object> _canExecute;
+        readonly Action<TParameter> _execute;
+        readonly Predicate<TParameter> _canExecute;
 
-        public DelegateCommand(Action<object> execute)
+        public DelegateCommand(Action<TParameter> execute)
             : this(execute, null)
         {
         }
 
-        public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
+        public DelegateCommand(Action<TParameter> execute, Predicate<TParameter> canExecute)
         {
             Debug.Assert(execute != null);
 
@@ -24,9 +24,15 @@ namespace GitEdit.Mvvm
         }
 
         [DebuggerStepThrough]
-        public bool CanExecute(object parameter)
+        public bool CanExecute(TParameter parameter)
         {
             return _canExecute == null ? true : _canExecute(parameter);
+        }
+
+        [DebuggerStepThrough]
+        bool ICommand.CanExecute(object parameter)
+        {
+            return CanExecute((TParameter)parameter);
         }
 
         public event EventHandler CanExecuteChanged
@@ -35,9 +41,14 @@ namespace GitEdit.Mvvm
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameter)
+        public void Execute(TParameter parameter)
         {
             _execute(parameter);
+        }
+
+        void ICommand.Execute(object parameter)
+        {
+            Execute((TParameter)parameter);
         }
     }
 }
