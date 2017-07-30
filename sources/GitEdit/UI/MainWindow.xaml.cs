@@ -67,24 +67,6 @@ namespace GitEdit.UI
             }
         }
 
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            var saveFileChooser = new SaveFileChooser(this);
-            var dataContext = new MainWindowViewModel(saveFileChooser);
-            base.DataContext = dataContext;
-
-            dataContext.QuitRequested += (sender, e) => Close();
-
-            dataContext.Editor.FileLoadRequested += (sender, e) => editor.LoadFile(e);
-            dataContext.Editor.FileSaveRequested += (sender, e) => editor.SaveFile(e);
-
-            Rect = Settings.Default.MainWindowRect;
-
-            editor.Focus();
-        }
-
         void OnSaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             DataContext.TrySave();
@@ -134,6 +116,24 @@ namespace GitEdit.UI
         void OnEditorFileNameChanged(object sender, EventArgs e)
         {
             DataContext.Editor.OnFileNameChanged();
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            var saveFileChooser = new SaveFileChooser(this);
+            var dataContext = new MainWindowViewModel(saveFileChooser);
+            base.DataContext = dataContext;
+
+            dataContext.QuitRequested += (sender, e) => Close();
+
+            dataContext.Editor.FileLoadRequested += (sender, e) => editor.LoadFile(e);
+            dataContext.Editor.FileSaveRequested += (sender, e) => editor.SaveFile(e);
+
+            Rect = Settings.Default.MainWindowRect;
+
+            editor.Focus();
         }
     }
 }
