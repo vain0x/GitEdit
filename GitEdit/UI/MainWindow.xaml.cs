@@ -38,11 +38,11 @@ namespace GitEdit.UI
 
             base.DataContext = new MainWindowViewModel(this);
 
-            _editor.Focus();
+            editor.Focus();
         }
 
         public ITextEditor Editor =>
-            _editor;
+            editor;
 
         void IMainWindow.Quit()
         {
@@ -66,7 +66,7 @@ namespace GitEdit.UI
         }
         #endregion
 
-        void _mainWindow_Drop(object sender, DragEventArgs e)
+        void OnDrop(object sender, DragEventArgs e)
         {
             var files =
                 ((string[])e.Data.GetData(DataFormats.FileDrop))
@@ -89,7 +89,7 @@ namespace GitEdit.UI
             }
         }
 
-        void _mainWindow_Closed(object sender, EventArgs e)
+        void OnClosed(object sender, EventArgs e)
         {
             var settings = Settings.Default;
             settings.MainWindowRect = new Rect(Left, Top, Width, Height);
