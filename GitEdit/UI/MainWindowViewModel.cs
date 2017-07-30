@@ -74,23 +74,23 @@ namespace GitEdit.UI
             }
         }
 
-        public Result Save()
+        public bool TrySave()
         {
             var currentFileName = Editor.Document?.FileName;
             var fileInfoOrNull =
                 string.IsNullOrEmpty(currentFileName)
                 ? View.GetSaveFileOrNull()
                 : new FileInfo(currentFileName);
-            if (fileInfoOrNull == null) return Result.Failure;
+            if (fileInfoOrNull == null) return false;
 
             Editor.SaveFile(fileInfoOrNull);
-            return Result.Success;
+            return true;
         }
 
         public void SaveQuit(EncodingType encodingType)
         {
             SetEncoding(encodingType);
-            if (Save() != Result.Success) return;
+            if (!TrySave()) return;
             View.Quit();
         }
 

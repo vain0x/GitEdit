@@ -56,7 +56,6 @@
     </ApplicationDefinition>
     <Compile Include="Utility\GenericExtensions.cs" />
     <Compile Include="Utility\IOUtility.cs" />
-    <Compile Include="Utility\Result.cs" />
     <Compile Include="UI\Editors\Completing\CompletionData.cs" />
     <Compile Include="Utility\EncodingType.cs" />
     <Compile Include="UI\Editors\ITextEditor.cs" />

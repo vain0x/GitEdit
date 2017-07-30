@@ -62,7 +62,7 @@ namespace GitEdit.UI
         
         void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            DataContext.Save();
+            DataContext.TrySave();
         }
         #endregion
 
