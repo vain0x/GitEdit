@@ -1,6 +1,8 @@
 # GitEdit
 Simple text editor for Git.
 
+![Screenshot](documents/screenshot.png)
+
 ## Features
 - Quick launch.
 - Syntax highlighting:
