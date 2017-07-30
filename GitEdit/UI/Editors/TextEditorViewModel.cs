@@ -80,6 +80,11 @@ namespace GitEdit.UI.Editors
         public string EncodingName =>
             Encoding?.EncodingName ?? "No Encoding";
 
+        public void OnFileNameChanged()
+        {
+            RaisePropertyChanged(nameof(Title));
+        }
+
         public void LoadFile(FileInfo file)
         {
             editor.LoadFile(file);
@@ -95,11 +100,6 @@ namespace GitEdit.UI.Editors
             this.editor = editor;
 
             document = new TextDocument();
-
-            editor.FileNameChanged += (sender, e) =>
-            {
-                RaisePropertyChanged(nameof(Title));
-            };
         }
     }
 }

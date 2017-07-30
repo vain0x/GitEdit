@@ -46,6 +46,7 @@
             x:Name="editor"
             Margin="5"
             Document="{Binding Editor.Document, Mode=TwoWay}"
+            FileNameChanged="OnEditorFileNameChanged"
             IsModified="{Binding Editor.IsModified, Mode=OneWayToSource}"
             SyntaxHighlighting="{Binding Editor.SyntaxHighlighting, Mode=OneWayToSource}"
             Encoding="{Binding Editor.Encoding, Mode=TwoWay}"

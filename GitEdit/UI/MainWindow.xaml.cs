@@ -123,5 +123,10 @@ namespace GitEdit.UI
             settings.MainWindowRect = Rect;
             settings.Save();
         }
+
+        void OnEditorFileNameChanged(object sender, EventArgs e)
+        {
+            DataContext.Editor.OnFileNameChanged();
+        }
     }
 }
