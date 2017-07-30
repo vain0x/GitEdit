@@ -103,6 +103,7 @@
     <EmbeddedResource Include="Resources\SyntaxHighlighting\CommitMessage.xshd" />
     <EmbeddedResource Include="Resources\SyntaxHighlighting\Ini.xshd" />
     <EmbeddedResource Include="Resources\SyntaxHighlighting\GitIgnore.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\RebaseTodo.xshd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
