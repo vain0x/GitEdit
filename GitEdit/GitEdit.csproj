@@ -64,7 +64,7 @@
     <Compile Include="UI\Editors\Highlighting\GitEditHighlightingManager.cs" />
     <Compile Include="UI\Editors\MyTextEditor.cs" />
     <Compile Include="Mvvm\DelegateCommand.cs" />
-    <Compile Include="Mvvm\ViewModelBase.cs" />
+    <Compile Include="Mvvm\BindableBase.cs" />
     <Compile Include="UI\MainWindowViewModel.cs" />
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

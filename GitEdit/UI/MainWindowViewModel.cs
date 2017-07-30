@@ -10,7 +10,7 @@ using GitEdit.UI.Editors;
 namespace GitEdit.UI
 {
     public class MainWindowViewModel
-        : ViewModelBase
+        : BindableBase
     {
         public ICommand CompleteCommand { get; }
         public ICommand AbortCommand { get; }

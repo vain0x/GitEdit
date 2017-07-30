@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace GitEdit.Mvvm
 {
-    public class ViewModelBase
+    public class BindableBase
         : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
