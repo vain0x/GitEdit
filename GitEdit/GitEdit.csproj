@@ -58,6 +58,7 @@
     <Compile Include="Utility\IOUtility.cs" />
     <Compile Include="Utility\Result.cs" />
     <Compile Include="ViewModel\CompletionData.cs" />
+    <Compile Include="ViewModel\EncodingType.cs" />
     <Compile Include="ViewModel\ITextEditor.cs" />
     <Compile Include="View\Editor\CodeCompletion.cs" />
     <Compile Include="View\Editor\GitEditHighlightingManager.cs" />

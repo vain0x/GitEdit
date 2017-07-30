@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using GitEdit.Properties;
@@ -59,6 +60,19 @@ namespace GitEdit.ViewModel
             Editor.LoadFile(file);
         }
 
+        void SetEncoding(EncodingType encodingType)
+        {
+            switch (encodingType)
+            {
+                case EncodingType.Utf8:
+                    Editor.Encoding = new UTF8Encoding();
+                    break;
+                case EncodingType.Default:
+                default:
+                    break;
+            }
+        }
+
         public Result Save()
         {
             var currentFileName = Editor.Document?.FileName;
@@ -72,8 +86,9 @@ namespace GitEdit.ViewModel
             return Result.Success;
         }
 
-        public void SaveQuit()
+        public void SaveQuit(EncodingType encodingType)
         {
+            SetEncoding(encodingType);
             if (Save() != Result.Success) return;
             View.Quit();
         }
@@ -81,13 +96,19 @@ namespace GitEdit.ViewModel
         public void ClearQuit()
         {
             Editor.Document.Text = "";
-            SaveQuit();
+            SaveQuit(EncodingType.Default);
         }
 
         public MainWindowViewModel(IMainWindow view)
         {
             View = view;
-            CompleteCommand = new RelayCommand(_ => SaveQuit());
+            CompleteCommand =
+                new RelayCommand(parameter =>
+                    SaveQuit(
+                        (EncodingType)Enum.Parse(
+                            typeof(EncodingType),
+                            (string)parameter
+                        )));
             AbortCommand = new RelayCommand(_ => ClearQuit());
 
             Editor.ModificationIndicatorChanged +=

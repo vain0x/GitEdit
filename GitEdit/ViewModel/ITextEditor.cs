@@ -19,7 +19,7 @@ namespace GitEdit.ViewModel
         event EventHandler EncodingChanged;
 
         IHighlightingDefinition SyntaxHighlighting { get; }
-        Encoding Encoding { get; }
+        Encoding Encoding { get; set; }
 
         void SaveFile(FileInfo file);
         void LoadFile(FileInfo file);
