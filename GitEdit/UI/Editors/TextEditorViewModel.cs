@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GitEdit.Mvvm;
+using GitEdit.Properties;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 
@@ -80,6 +81,12 @@ namespace GitEdit.UI.Editors
 
         public string EncodingName =>
             Encoding?.EncodingName ?? "No Encoding";
+
+        public string FontFamily =>
+            Settings.Default.FontFamily;
+
+        public int FontSize =>
+            Settings.Default.FontSize;
 
         public void OnFileNameChanged()
         {

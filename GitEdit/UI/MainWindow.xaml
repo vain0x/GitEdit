@@ -50,8 +50,8 @@
             IsModified="{Binding Editor.IsModified, Mode=OneWayToSource}"
             SyntaxHighlighting="{Binding Editor.SyntaxHighlighting, Mode=OneWayToSource}"
             Encoding="{Binding Editor.Encoding, Mode=TwoWay}"
-            FontFamily="{Binding FontFamily}"
-            FontSize="{Binding FontSize}"
+            FontFamily="{Binding Editor.FontFamily}"
+            FontSize="{Binding Editor.FontSize}"
             ShowLineNumbers="True"
             WordWrap="True"
             >

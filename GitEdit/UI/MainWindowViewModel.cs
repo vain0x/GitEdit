@@ -22,12 +22,6 @@ namespace GitEdit.UI
         public TextEditorViewModel Editor { get; } =
             new TextEditorViewModel();
 
-        public string FontFamily =>
-            Settings.Default.FontFamily;
-
-        public int FontSize =>
-            Settings.Default.FontSize;
-
         public void OpenFile(FileInfo file)
         {
             Editor.LoadFile(file);
