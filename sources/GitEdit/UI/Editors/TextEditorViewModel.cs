@@ -103,9 +103,9 @@ namespace GitEdit.UI.Editors
             FileSaveRequested?.Invoke(this, file);
         }
 
-        public TextEditorViewModel()
+        public TextEditorViewModel(IDocument document)
         {
-            document = new TextDocument();
+            this.document = document;
         }
     }
 }

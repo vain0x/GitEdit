@@ -7,7 +7,6 @@
     Title="{Binding Editor.Title}"
     AllowDrop="True"
     Drop="OnDrop"
-    Loaded="OnLoaded"
     Closed="OnClosed"
     >
     <Window.Resources>
