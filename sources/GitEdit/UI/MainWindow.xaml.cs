@@ -68,20 +68,27 @@ namespace GitEdit.UI
             }
         }
 
-        void OnSaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        void LoadInitialFile()
         {
-            DataContext.TrySave();
-        }
-
-        void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            // Open the given file.
             var args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
                 var file = new FileInfo(args[1]);
-                if (file.Exists) DataContext.OpenFile(file);
+
+                try
+                {
+                    editor.LoadFile(file);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show($"Couldn't load file: '{file.FullName}'.", App.Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
+        }
+
+        void OnSaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            DataContext.TrySave();
         }
 
         void OnDrop(object sender, DragEventArgs e)
@@ -138,6 +145,8 @@ namespace GitEdit.UI
             Rect = Settings.Default.MainWindowRect;
 
             editor.Focus();
+
+            LoadInitialFile();
         }
     }
 }
