@@ -25,6 +25,16 @@ git config --local core.editor "the-unarchived-directory/GitEdit.exe"
 git config --global core.editor "the-unarchived-directory/GitEdit.exe"
 ```
 
+## Bulid
+Before build, you need to install dependency packages via Paket:
+
+```
+.paket/paket.bootstrapper.exe
+.paket/paket.exe install
+```
+
+To build, use Visual Studio 2015 (or later) or MSBuild.
+
 ## Libraries
 - [AvalonEdit](https://github.com/icsharpcode/AvalonEdit)
 
