@@ -4,18 +4,18 @@ using System.Windows.Input;
 
 namespace GitEdit.Mvvm
 {
-    public class RelayCommand
+    public class DelegateCommand
         : ICommand
     {
         readonly Action<object> _execute;
         readonly Predicate<object> _canExecute;
 
-        public RelayCommand(Action<object> execute)
+        public DelegateCommand(Action<object> execute)
             : this(execute, null)
         {
         }
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public DelegateCommand(Action<object> execute, Predicate<object> canExecute)
         {
             Debug.Assert(execute != null);
 

@@ -63,7 +63,7 @@
     <Compile Include="UI\Editors\Completing\CodeCompletion.cs" />
     <Compile Include="UI\Editors\Highlighting\GitEditHighlightingManager.cs" />
     <Compile Include="UI\Editors\MyTextEditor.cs" />
-    <Compile Include="Mvvm\RelayCommand.cs" />
+    <Compile Include="Mvvm\DelegateCommand.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="UI\MainWindowViewModel.cs" />
     <Page Include="UI\MainWindow.xaml">
