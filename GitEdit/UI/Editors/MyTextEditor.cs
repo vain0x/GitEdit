@@ -49,7 +49,6 @@ namespace GitEdit.UI.Editors
         {
             HighlightingManager = new GitEditHighlightingManager();
             CodeCompletion = new CodeCompletion(this);
-            Encoding = new UTF8Encoding();
         }
     }
 }
