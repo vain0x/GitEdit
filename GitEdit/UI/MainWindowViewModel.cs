@@ -3,10 +3,11 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using GitEdit.Mvvm;
 using GitEdit.Properties;
-using GitEdit.Utility;
+using GitEdit.UI.Editors;
 
-namespace GitEdit.ViewModel
+namespace GitEdit.UI
 {
     public class MainWindowViewModel
         : ViewModelBase
@@ -43,7 +44,7 @@ namespace GitEdit.ViewModel
                     : Path.GetFileName(currentFileName);
                 var indicator =
                     Editor.IsOriginal ? "" : " *";
-                return string.Format("{0}{1} | {2}", fileName, indicator, Constant.AppName);
+                return string.Format("{0}{1} | {2}", fileName, indicator, App.Name);
             }
         }
 

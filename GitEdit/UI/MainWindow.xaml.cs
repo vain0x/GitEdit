@@ -15,12 +15,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Win32;
-using ICSharpCode.AvalonEdit;
 using GitEdit.Properties;
-using GitEdit.ViewModel;
+using GitEdit.UI.Editors;
+using ICSharpCode.AvalonEdit;
+using Microsoft.Win32;
 
-namespace GitEdit.View
+namespace GitEdit.UI
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

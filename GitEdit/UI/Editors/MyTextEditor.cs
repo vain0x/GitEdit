@@ -4,10 +4,8 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using ICSharpCode.AvalonEdit;
-using GitEdit.Model;
-using GitEdit.ViewModel;
 
-namespace GitEdit.View
+namespace GitEdit.UI.Editors
 {
     public class MyTextEditor
         : TextEditor

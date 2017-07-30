@@ -1,4 +1,6 @@
-﻿namespace GitEdit.Utility
+﻿using System;
+
+namespace GitEdit
 {
     public enum Result
         : byte

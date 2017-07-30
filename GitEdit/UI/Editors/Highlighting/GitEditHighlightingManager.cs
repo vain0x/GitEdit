@@ -3,12 +3,25 @@ using System.IO;
 using System.Xml;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
-using GitEdit.ViewModel;
 
-namespace GitEdit.View
+namespace GitEdit.UI.Editors
 {
     public class GitEditHighlightingManager
     {
+        #region SyntaxDefinitions
+        public const string CommitMessageSyntaxName = "CommitMessage";
+        public const string GitIgnoreSyntaxName = "GitIgnore";
+        public const string IniSyntaxName = "Ini";
+
+        public static Tuple<string, string[]>[] SyntaxDefinitions =>
+            new[]
+            {
+                Tuple.Create(CommitMessageSyntaxName, new string[] { }),
+                Tuple.Create(GitIgnoreSyntaxName, new[] { ".gitignore" }),
+                Tuple.Create(IniSyntaxName, new[] { ".ini", ".cfg", ".gitconfig" }),
+            };
+        #endregion
+
         /// <summary>
         /// Returns the most appropreate syntax definition for given file; or null.
         /// </summary>
@@ -18,11 +31,11 @@ namespace GitEdit.View
             {
                 case "COMMIT_EDITMSG":
                 case "MERGE_MSG":
-                    return HighlightingManager.Instance.GetDefinition(Constant.CommitMessageSyntaxName);
+                    return HighlightingManager.Instance.GetDefinition(CommitMessageSyntaxName);
                 case "config":
-                    return HighlightingManager.Instance.GetDefinition(Constant.IniSyntaxName);
+                    return HighlightingManager.Instance.GetDefinition(IniSyntaxName);
                 case "exclude":
-                    return HighlightingManager.Instance.GetDefinition(Constant.GitIgnoreSyntaxName);
+                    return HighlightingManager.Instance.GetDefinition(GitIgnoreSyntaxName);
                 default:
                     return HighlightingManager.Instance.GetDefinitionByExtension(file.Extension);
             }
@@ -45,7 +58,7 @@ namespace GitEdit.View
 
         public void RegisterSyntaxHighlightings()
         {
-            foreach (var def in Constant.SyntaxDefinitions)
+            foreach (var def in SyntaxDefinitions)
             {
                 var name = def.Item1;
                 var path = string.Format("GitEdit.Resources.SyntaxHighlighting.{0}.xshd", name);

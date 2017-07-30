@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace GitEdit.ViewModel
+namespace GitEdit.Mvvm
 {
     public class ViewModelBase
         : INotifyPropertyChanged

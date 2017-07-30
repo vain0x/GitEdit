@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GitEdit.Utility
+namespace GitEdit
 {
     public static class GenericExtensions
     {

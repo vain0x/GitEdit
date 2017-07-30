@@ -4,7 +4,7 @@ using System.Text;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 
-namespace GitEdit.ViewModel
+namespace GitEdit.UI.Editors
 {
     public interface ITextEditor
         : ITextEditorComponent

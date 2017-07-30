@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace GitEdit.Model
+namespace GitEdit
 {
     public static class FileInfoExtensions
     {
