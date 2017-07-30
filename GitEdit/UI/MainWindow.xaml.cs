@@ -85,7 +85,7 @@ namespace GitEdit.UI
             editor.Focus();
         }
 
-        void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        void OnSaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             DataContext.TrySave();
         }

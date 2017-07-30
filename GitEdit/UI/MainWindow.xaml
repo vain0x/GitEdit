@@ -20,7 +20,7 @@
     <Window.CommandBindings>
         <CommandBinding
             Command="ApplicationCommands.Save"
-            Executed="SaveCommandExecuted"
+            Executed="OnSaveCommandExecuted"
             />
     </Window.CommandBindings>
 
