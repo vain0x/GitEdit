@@ -54,17 +54,14 @@ namespace GitEdit.UI
             var dataContext = new MainWindowViewModel(this);
             base.DataContext = dataContext;
 
-            Rect = Settings.Default.MainWindowRect;
+            dataContext.QuitRequested += (sender, e) => Close();
 
             dataContext.Editor.FileLoadRequested += (sender, e) => editor.LoadFile(e);
             dataContext.Editor.FileSaveRequested += (sender, e) => editor.SaveFile(e);
 
-            editor.Focus();
-        }
+            Rect = Settings.Default.MainWindowRect;
 
-        void IMainWindow.Quit()
-        {
-            Close();
+            editor.Focus();
         }
 
         #region Save

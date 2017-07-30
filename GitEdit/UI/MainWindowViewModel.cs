@@ -12,6 +12,8 @@ namespace GitEdit.UI
     public sealed class MainWindowViewModel
         : BindableBase
     {
+        public event EventHandler QuitRequested;
+
         public ICommand CompleteCommand { get; }
         public ICommand AbortCommand { get; }
 
@@ -61,7 +63,7 @@ namespace GitEdit.UI
         {
             SetEncoding(encodingType);
             if (!TrySave()) return;
-            View.Quit();
+            QuitRequested?.Invoke(this, EventArgs.Empty);
         }
 
         public void ClearQuit()
@@ -86,6 +88,5 @@ namespace GitEdit.UI
     public interface IMainWindow
     {
         FileInfo GetSaveFileOrNull();
-        void Quit();
     }
 }
