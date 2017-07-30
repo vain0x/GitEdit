@@ -17,7 +17,6 @@ namespace GitEdit.UI.Editors
         public event EventHandler ModificationIndicatorChanged;
         public event EventHandler SyntaxHighlightingChanged;
         public event EventHandler EncodingChanged;
-        public event EventHandler<FileInfo> FileLoaded;
 
         public void ListenPropertyChanged(DependencyProperty dp, Action<EventArgs> raise)
         {
@@ -44,24 +43,24 @@ namespace GitEdit.UI.Editors
                 EncodingProperty,
                 e => EncodingChanged?.Invoke(this, e)
             );
-
-            FileLoaded += (sender, file) =>
-            {
-                var syntax = HighlightingManager.TryDetectSyntaxHighlighting(file);
-                if (syntax != null) { SyntaxHighlighting = syntax; }
-
-                CodeCompletion.RecollectCompletionWords();
-            };
         }
 
         bool ITextEditor.IsOriginal =>
             Document.UndoStack.IsOriginalFile;
 
+        void OnFileLoaded(FileInfo file)
+        {
+            var syntax = HighlightingManager.TryDetectSyntaxHighlighting(file);
+            if (syntax != null) { SyntaxHighlighting = syntax; }
+
+            CodeCompletion.RecollectCompletionWords();
+        }
+
         public void LoadFile(FileInfo file)
         {
             Load(file.FullName);
             Document.FileName = file.FullName;
-            FileLoaded?.Invoke(this, file);
+            OnFileLoaded(file);
         }
 
         public void SaveFile(FileInfo file)
