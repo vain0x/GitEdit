@@ -15,32 +15,27 @@ namespace GitEdit.UI.Editors
         TextEditor Editor { get; }
 
         #region Collect completion words
-        List<CompletionData> CompletionItems { get; } =
-            new List<CompletionData>();
+        Task<CompletionData[]> completionItemsTask =
+            Task.FromResult(new CompletionData[0]);
 
         static Regex CompletionWordRegex { get; } =
-            new Regex(@"[a-zA-Z_]\w{4,}");
+            new Regex(@"[a-zA-Z_-][\w-]{4,}", RegexOptions.Compiled);
 
-        void CollectCompletionWords(string text)
+        CompletionData[] CollectCompletionWords(string text)
         {
-            var items =
+            return
                 CompletionWordRegex.Matches(text)
                 .Cast<Match>()
                 .Select(m => m.Value)
                 .Distinct()
-                .Select(word => new CompletionData(word));
-
-            CompletionItems.AddRange(items);
+                .Select(word => new CompletionData(word))
+                .ToArray();
         }
 
         public void RecollectCompletionWords()
         {
             var text = Editor.Text;
-            Task.Run(() =>
-            {
-                CompletionItems.Clear();
-                CollectCompletionWords(text);
-            });
+            completionItemsTask = Task.Run(() => CollectCompletionWords(text));
         }
         #endregion
 
@@ -87,7 +82,7 @@ namespace GitEdit.UI.Editors
 
         void AddCompletionItemsTo(CompletionWindow completionWindow)
         {
-            foreach (var item in CompletionItems)
+            foreach (var item in completionItemsTask.Result)
             {
                 completionWindow.CompletionList.CompletionData.Add(item);
             }
