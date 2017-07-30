@@ -49,12 +49,10 @@ namespace GitEdit.UI
         }
 
         public string SyntaxName =>
-            Editor.SyntaxHighlighting
-            .ApplyTo(h => h == null ? "Plain text" : h.Name);
+            Editor.SyntaxHighlighting?.Name ?? "Plain text";
 
         public string EncodingName =>
-            Editor.Encoding
-            .ApplyTo(e => e == null ? "No encoding" : e.EncodingName);
+            Editor.Encoding?.EncodingName ?? "No encoding";
 
         public void OpenFile(FileInfo file)
         {

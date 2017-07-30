@@ -54,7 +54,6 @@
     <ApplicationDefinition Include="UI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Utility\GenericExtensions.cs" />
     <Compile Include="Utility\IOUtility.cs" />
     <Compile Include="UI\Editors\Completing\CompletionData.cs" />
     <Compile Include="Utility\EncodingType.cs" />
