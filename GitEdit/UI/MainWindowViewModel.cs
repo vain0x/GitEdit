@@ -20,13 +20,6 @@ namespace GitEdit.UI
         ITextEditor Editor =>
             View.Editor;
 
-        Rect _rect = Settings.Default.MainWindowRect;
-        public Rect Rect
-        {
-            get { return _rect; }
-            set { SetProperty(ref _rect, value); }
-        }
-
         public string FontFamily =>
             Settings.Default.FontFamily;
 

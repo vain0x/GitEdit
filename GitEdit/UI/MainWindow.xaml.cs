@@ -32,11 +32,28 @@ namespace GitEdit.UI
         public new MainWindowViewModel DataContext =>
             (MainWindowViewModel)base.DataContext;
 
+        Rect Rect
+        {
+            get
+            {
+                return new Rect(Left, Top, Width, Height);
+            }
+            set
+            {
+                Left = value.Left;
+                Top = value.Top;
+                Width = value.Width;
+                Height = value.Height;
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
 
             base.DataContext = new MainWindowViewModel(this);
+
+            Rect = Settings.Default.MainWindowRect;
 
             editor.Focus();
         }
@@ -92,7 +109,7 @@ namespace GitEdit.UI
         void OnClosed(object sender, EventArgs e)
         {
             var settings = Settings.Default;
-            settings.MainWindowRect = new Rect(Left, Top, Width, Height);
+            settings.MainWindowRect = Rect;
             settings.Save();
         }
     }
