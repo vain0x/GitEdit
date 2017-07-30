@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GitEdit.ViewModel
+namespace GitEdit.UI
 {
-    public enum EncodingType
+    public interface ISaveFileChooser
     {
-        Default = 0,
-        Utf8,
+        FileInfo GetSaveFileOrNull();
     }
 }

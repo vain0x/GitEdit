@@ -51,31 +51,28 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="View\App.xaml">
+    <ApplicationDefinition Include="UI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Utility\GenericExtensions.cs" />
-    <Compile Include="Utility\IOUtility.cs" />
-    <Compile Include="Utility\Result.cs" />
-    <Compile Include="ViewModel\CompletionData.cs" />
-    <Compile Include="ViewModel\EncodingType.cs" />
-    <Compile Include="ViewModel\ITextEditor.cs" />
-    <Compile Include="View\Editor\CodeCompletion.cs" />
-    <Compile Include="View\Editor\GitEditHighlightingManager.cs" />
-    <Compile Include="View\Editor\MyTextEditor.cs" />
-    <Compile Include="Utility\RelayCommand.cs" />
-    <Compile Include="Utility\ViewModelBase.cs" />
-    <Compile Include="ViewModel\Domain.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Page Include="View\MainWindow.xaml">
+    <Compile Include="UI\Editors\Completing\CompletionData.cs" />
+    <Compile Include="UI\Editors\TextEditorViewModel.cs" />
+    <Compile Include="UI\ISaveFileChooser.cs" />
+    <Compile Include="UI\Editors\EncodingType.cs" />
+    <Compile Include="UI\Editors\Completing\CodeCompletion.cs" />
+    <Compile Include="UI\Editors\Highlighting\GitEditHighlightingManager.cs" />
+    <Compile Include="UI\Editors\MyTextEditor.cs" />
+    <Compile Include="Mvvm\DelegateCommand.cs" />
+    <Compile Include="Mvvm\BindableBase.cs" />
+    <Compile Include="UI\MainWindowViewModel.cs" />
+    <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="View\App.xaml.cs">
+    <Compile Include="UI\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -103,13 +100,14 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <EmbeddedResource Include="Resource\SyntaxHighlighting\CommitMessage.xshd" />
-    <EmbeddedResource Include="Resource\SyntaxHighlighting\Ini.xshd" />
-    <EmbeddedResource Include="Resource\SyntaxHighlighting\GitIgnore.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\CommitMessage.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\Ini.xshd" />
+    <EmbeddedResource Include="Resources\SyntaxHighlighting\GitIgnore.xshd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

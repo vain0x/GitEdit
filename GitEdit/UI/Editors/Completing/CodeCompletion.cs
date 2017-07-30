@@ -7,11 +7,10 @@ using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
-using GitEdit.ViewModel;
 
-namespace GitEdit.View
+namespace GitEdit.UI.Editors
 {
-    public class CodeCompletion
+    public sealed class CodeCompletion
     {
         TextEditor Editor { get; }
 
