@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GitEdit.Mvvm;
 using GitEdit.Properties;
 using GitEdit.UI.Editors;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace GitEdit.UI
 {
@@ -19,8 +20,7 @@ namespace GitEdit.UI
 
         ISaveFileChooser SaveFileChooser { get; }
 
-        public TextEditorViewModel Editor { get; } =
-            new TextEditorViewModel();
+        public TextEditorViewModel Editor { get; }
 
         public void OpenFile(FileInfo file)
         {
@@ -66,8 +66,9 @@ namespace GitEdit.UI
             SaveQuit(EncodingType.Current);
         }
 
-        public MainWindowViewModel(ISaveFileChooser saveFileChooser)
+        public MainWindowViewModel(IDocument document, ISaveFileChooser saveFileChooser)
         {
+            Editor = new TextEditorViewModel(document);
             SaveFileChooser = saveFileChooser;
 
             CompleteCommand = new DelegateCommand<EncodingType>(SaveQuit);

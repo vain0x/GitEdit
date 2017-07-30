@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using GitEdit.Properties;
 using GitEdit.UI.Editors;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Document;
 using Microsoft.Win32;
 
 namespace GitEdit.UI
@@ -122,8 +123,11 @@ namespace GitEdit.UI
         {
             InitializeComponent();
 
+            var document = new TextDocument();
+            editor.Document = document;
+
             var saveFileChooser = new SaveFileChooser(this);
-            var dataContext = new MainWindowViewModel(saveFileChooser);
+            var dataContext = new MainWindowViewModel(document, saveFileChooser);
             base.DataContext = dataContext;
 
             dataContext.QuitRequested += (sender, e) => Close();
