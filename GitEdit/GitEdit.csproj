@@ -56,6 +56,7 @@
     </ApplicationDefinition>
     <Compile Include="UI\Editors\Completing\CompletionData.cs" />
     <Compile Include="UI\Editors\TextEditorViewModel.cs" />
+    <Compile Include="UI\ISaveFileChooser.cs" />
     <Compile Include="Utility\EncodingType.cs" />
     <Compile Include="UI\Editors\ITextEditor.cs" />
     <Compile Include="UI\Editors\Completing\CodeCompletion.cs" />
@@ -107,7 +108,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\Notifications\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

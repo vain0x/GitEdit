@@ -17,7 +17,7 @@ namespace GitEdit.UI
         public ICommand CompleteCommand { get; }
         public ICommand AbortCommand { get; }
 
-        IMainWindow View { get; }
+        ISaveFileChooser SaveFileChooser { get; }
 
         public TextEditorViewModel Editor { get; } =
             new TextEditorViewModel();
@@ -51,7 +51,7 @@ namespace GitEdit.UI
             var currentFileName = Editor.Document?.FileName;
             var fileInfoOrNull =
                 string.IsNullOrEmpty(currentFileName)
-                ? View.GetSaveFileOrNull()
+                ? SaveFileChooser.GetSaveFileOrNull()
                 : new FileInfo(currentFileName);
             if (fileInfoOrNull == null) return false;
 
@@ -72,9 +72,9 @@ namespace GitEdit.UI
             SaveQuit(EncodingType.Default);
         }
 
-        public MainWindowViewModel(IMainWindow view)
+        public MainWindowViewModel(ISaveFileChooser saveFileChooser)
         {
-            View = view;
+            SaveFileChooser = saveFileChooser;
 
             CompleteCommand =
                 new DelegateCommand<string>(parameter =>
@@ -83,10 +83,5 @@ namespace GitEdit.UI
                     ));
             AbortCommand = new DelegateCommand<object>(_ => ClearQuit());
         }
-    }
-
-    public interface IMainWindow
-    {
-        FileInfo GetSaveFileOrNull();
     }
 }

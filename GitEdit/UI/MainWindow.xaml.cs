@@ -27,8 +27,28 @@ namespace GitEdit.UI
     /// </summary>
     public partial class MainWindow
         : Window
-        , IMainWindow
     {
+        sealed class SaveFileChooser
+            : ISaveFileChooser
+        {
+            MainWindow Window { get; }
+
+            public FileInfo GetSaveFileOrNull()
+            {
+                var sfd = new SaveFileDialog();
+                var result = sfd.ShowDialog(Window);
+                return
+                    result.HasValue && result.Value
+                    ? new FileInfo(sfd.FileName)
+                    : null;
+            }
+
+            public SaveFileChooser(MainWindow window)
+            {
+                Window = window;
+            }
+        }
+
         public new MainWindowViewModel DataContext =>
             (MainWindowViewModel)base.DataContext;
 
@@ -51,7 +71,8 @@ namespace GitEdit.UI
         {
             InitializeComponent();
 
-            var dataContext = new MainWindowViewModel(this);
+            var saveFileChooser = new SaveFileChooser(this);
+            var dataContext = new MainWindowViewModel(saveFileChooser);
             base.DataContext = dataContext;
 
             dataContext.QuitRequested += (sender, e) => Close();
@@ -64,22 +85,10 @@ namespace GitEdit.UI
             editor.Focus();
         }
 
-        #region Save
-        FileInfo IMainWindow.GetSaveFileOrNull()
-        {
-            var sfd = new SaveFileDialog();
-            var result = sfd.ShowDialog(this);
-            return
-                result.HasValue && result.Value
-                ? new FileInfo(sfd.FileName)
-                : null;
-        }
-        
         void SaveCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             DataContext.TrySave();
         }
-        #endregion
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
