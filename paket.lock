@@ -1,4 +1,0 @@
-NUGET
-  remote: https://www.nuget.org/api/v2
-  specs:
-    AvalonEdit (5.0.2)

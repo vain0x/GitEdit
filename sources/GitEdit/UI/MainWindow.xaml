@@ -1,0 +1,101 @@
+﻿<Window
+    x:Class="GitEdit.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+    xmlns:editors="clr-namespace:GitEdit.UI.Editors"
+    Title="{Binding Editor.Title}"
+    AllowDrop="True"
+    Drop="OnDrop"
+    Loaded="OnLoaded"
+    Closed="OnClosed"
+    >
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding
+            Command="ApplicationCommands.Save"
+            Executed="OnSaveCommandExecuted"
+            />
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding
+            Gesture="Ctrl+W"
+            Command="{Binding CompleteCommand}"
+            CommandParameter="{x:Static editors:EncodingType.Current}"
+            />
+        <KeyBinding
+            Gesture="Ctrl+Shift+Delete"
+            Command="{Binding AbortCommand}"
+            />
+    </Window.InputBindings>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <editors:MyTextEditor
+            x:Name="editor"
+            Margin="5"
+            Document="{Binding Editor.Document, Mode=TwoWay}"
+            FileNameChanged="OnEditorFileNameChanged"
+            IsModified="{Binding Editor.IsModified, Mode=OneWayToSource}"
+            SyntaxHighlighting="{Binding Editor.SyntaxHighlighting, Mode=OneWayToSource}"
+            Encoding="{Binding Editor.Encoding, Mode=TwoWay}"
+            FontFamily="{Binding Editor.FontFamily}"
+            FontSize="{Binding Editor.FontSize}"
+            ShowLineNumbers="True"
+            WordWrap="True"
+            >
+            <editors:MyTextEditor.Options>
+                <avalonEdit:TextEditorOptions
+                    CutCopyWholeLine="False"
+                    HighlightCurrentLine="True"
+                    ShowTabs="True"
+                    ShowSpaces="True"
+                    ConvertTabsToSpaces="True"
+                    IndentationSize="4"
+                    />
+            </editors:MyTextEditor.Options>
+        </editors:MyTextEditor>
+
+        <Grid Grid.Row="1">
+            <StatusBar>
+                <StatusBarItem Content="{Binding Editor.SyntaxName}" />
+                <StatusBarItem Content="{Binding Editor.EncodingName}" />
+            </StatusBar>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button
+                    Content="Abort"
+                    Command="{Binding AbortCommand}"
+                    ToolTip="Ctrl+Shift+Delete"
+                    />
+                <Button
+                    Content="Complete"
+                    Command="{Binding CompleteCommand}"
+                    CommandParameter="{x:Static editors:EncodingType.Current}"
+                    ToolTip="Ctrl+W"
+                    >
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem 
+                                Header="In UTF8"
+                                Command="{Binding CompleteCommand}"
+                                CommandParameter="{x:Static editors:EncodingType.Utf8}"
+                                />
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
