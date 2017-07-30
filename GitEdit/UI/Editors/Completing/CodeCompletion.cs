@@ -185,7 +185,15 @@ namespace GitEdit.UI.Editors
         void AttachEvents()
         {
             Editor.KeyDown += OnKeyDown;
-            Editor.Document.UpdateFinished += OnDocumentUpdateFinished;
+
+            Editor.DocumentChanged += (sender, e) =>
+            {
+                var document = Editor.Document;
+                if (document != null)
+                {
+                    document.UpdateFinished += OnDocumentUpdateFinished;
+                }
+            };
         }
         #endregion
 
