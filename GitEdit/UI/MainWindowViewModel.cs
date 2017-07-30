@@ -76,11 +76,7 @@ namespace GitEdit.UI
         {
             SaveFileChooser = saveFileChooser;
 
-            CompleteCommand =
-                new DelegateCommand<string>(parameter =>
-                    SaveQuit(
-                        (EncodingType)Enum.Parse(typeof(EncodingType), parameter)
-                    ));
+            CompleteCommand = new DelegateCommand<EncodingType>(SaveQuit);
             AbortCommand = new DelegateCommand<object>(_ => ClearQuit());
         }
     }

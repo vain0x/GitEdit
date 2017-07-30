@@ -57,7 +57,7 @@
     <Compile Include="UI\Editors\Completing\CompletionData.cs" />
     <Compile Include="UI\Editors\TextEditorViewModel.cs" />
     <Compile Include="UI\ISaveFileChooser.cs" />
-    <Compile Include="Utility\EncodingType.cs" />
+    <Compile Include="UI\Editors\EncodingType.cs" />
     <Compile Include="UI\Editors\ITextEditor.cs" />
     <Compile Include="UI\Editors\Completing\CodeCompletion.cs" />
     <Compile Include="UI\Editors\Highlighting\GitEditHighlightingManager.cs" />
