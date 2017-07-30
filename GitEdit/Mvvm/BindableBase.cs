@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -15,9 +16,11 @@ namespace GitEdit.Mvvm
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected void SetProperty<X>(ref X r, X x, [CallerMemberName] string propertyName = null)
+        protected void SetProperty<X>(ref X field, X value, [CallerMemberName] string propertyName = null)
         {
-            r = x;
+            if (EqualityComparer<X>.Default.Equals(field, value)) return;
+
+            field = value;
             NotifyPropertyChanged(propertyName);
         }
     }
