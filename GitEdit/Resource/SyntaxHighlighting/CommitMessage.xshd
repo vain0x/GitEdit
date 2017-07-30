@@ -23,8 +23,8 @@
             <Begin color="MetaTag">\[-</Begin>
             <End color="MetaTag">-\]</End>
         </Span>
-        <Span color="InsertionLine" begin="^\+" />
-        <Span color="DeletionLine" begin="^-" />
+        <Span color="InsertionLine" begin="^\+(?!\+\+)" />
+        <Span color="DeletionLine" begin="^-(?!--)" />
 
         <Span color="Metadata" begin="^\+\+\+" />
         <Span color="Metadata" begin="^---" />
