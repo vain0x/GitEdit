@@ -6,7 +6,7 @@ using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
 namespace GitEdit.UI.Editors
 {
-    public class GitEditHighlightingManager
+    public sealed class GitEditHighlightingManager
     {
         #region SyntaxDefinitions
         public const string CommitMessageSyntaxName = "CommitMessage";

@@ -6,7 +6,7 @@ using ICSharpCode.AvalonEdit.Editing;
 
 namespace GitEdit.UI.Editors
 {
-    public class CompletionData
+    public sealed class CompletionData
         : ICompletionData
     {
         public object Content => Text;

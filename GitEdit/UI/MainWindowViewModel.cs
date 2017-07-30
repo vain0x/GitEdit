@@ -9,7 +9,7 @@ using GitEdit.UI.Editors;
 
 namespace GitEdit.UI
 {
-    public class MainWindowViewModel
+    public sealed class MainWindowViewModel
         : BindableBase
     {
         public ICommand CompleteCommand { get; }

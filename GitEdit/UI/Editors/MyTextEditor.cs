@@ -7,7 +7,7 @@ using ICSharpCode.AvalonEdit;
 
 namespace GitEdit.UI.Editors
 {
-    public class MyTextEditor
+    public sealed class MyTextEditor
         : TextEditor
         , ITextEditor
     {

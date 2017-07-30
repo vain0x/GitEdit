@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace GitEdit.Mvvm
 {
-    public class DelegateCommand<TParameter>
+    public sealed class DelegateCommand<TParameter>
         : ICommand
     {
         readonly Action<TParameter> _execute;

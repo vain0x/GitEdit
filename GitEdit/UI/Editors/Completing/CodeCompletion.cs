@@ -10,7 +10,7 @@ using ICSharpCode.AvalonEdit.Document;
 
 namespace GitEdit.UI.Editors
 {
-    public class CodeCompletion
+    public sealed class CodeCompletion
     {
         TextEditor Editor { get; }
 
