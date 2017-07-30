@@ -62,9 +62,6 @@ namespace GitEdit.UI
             editor.Focus();
         }
 
-        public ITextEditor Editor =>
-            editor;
-
         void IMainWindow.Quit()
         {
             Close();

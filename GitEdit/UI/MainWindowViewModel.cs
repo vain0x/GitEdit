@@ -17,7 +17,8 @@ namespace GitEdit.UI
 
         IMainWindow View { get; }
 
-        public TextEditorViewModel Editor { get; }
+        public TextEditorViewModel Editor { get; } =
+            new TextEditorViewModel();
 
         public string FontFamily =>
             Settings.Default.FontFamily;
@@ -72,7 +73,6 @@ namespace GitEdit.UI
         public MainWindowViewModel(IMainWindow view)
         {
             View = view;
-            Editor = new TextEditorViewModel(view.Editor);
 
             CompleteCommand =
                 new DelegateCommand<string>(parameter =>
@@ -85,7 +85,6 @@ namespace GitEdit.UI
 
     public interface IMainWindow
     {
-        ITextEditor Editor { get; }
         FileInfo GetSaveFileOrNull();
         void Quit();
     }

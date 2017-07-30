@@ -16,8 +16,6 @@ namespace GitEdit.UI.Editors
         public event EventHandler<FileInfo> FileLoadRequested;
         public event EventHandler<FileInfo> FileSaveRequested;
 
-        readonly ITextEditor editor;
-
         IDocument document;
         public IDocument Document
         {
@@ -98,10 +96,8 @@ namespace GitEdit.UI.Editors
             FileSaveRequested?.Invoke(this, file);
         }
 
-        public TextEditorViewModel(ITextEditor editor)
+        public TextEditorViewModel()
         {
-            this.editor = editor;
-
             document = new TextDocument();
         }
     }
