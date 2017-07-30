@@ -29,27 +29,6 @@ namespace GitEdit.UI
     public partial class MainWindow
         : Window
     {
-        sealed class SaveFileChooser
-            : ISaveFileChooser
-        {
-            MainWindow Window { get; }
-
-            public FileInfo GetSaveFileOrNull()
-            {
-                var sfd = new SaveFileDialog();
-                var result = sfd.ShowDialog(Window);
-                return
-                    result.HasValue && result.Value
-                    ? new FileInfo(sfd.FileName)
-                    : null;
-            }
-
-            public SaveFileChooser(MainWindow window)
-            {
-                Window = window;
-            }
-        }
-
         public new MainWindowViewModel DataContext =>
             (MainWindowViewModel)base.DataContext;
 
@@ -133,7 +112,7 @@ namespace GitEdit.UI
             var document = new TextDocument();
             editor.Document = document;
 
-            var saveFileChooser = new SaveFileChooser(this);
+            var saveFileChooser = new GuiSaveFileChooser(this);
             var dataContext = new MainWindowViewModel(document, saveFileChooser);
             base.DataContext = dataContext;
 
