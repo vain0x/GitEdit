@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="FontFamily" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Myrica M,MS Gothic,Consolas</Value>
+      <Value Profile="(Default)">Consolas,Myrica M,MS Gothic</Value>
     </Setting>
     <Setting Name="FontSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">16</Value>
