@@ -10,7 +10,7 @@ Simple text editor for Git.
     - ``Ctrl+Space`` to try complete.
 - Optimized commands for Git:
     - ``Ctrl+W`` to save and exit.
-    - ``Ctrl+Shift+W`` to clear all, save and exit. (To cancel commit, rebase, etc.)
+    - ``Ctrl+Shift+Delete`` to clear all, save and exit. (To cancel commit, rebase, etc.)
 
 ## Install
 Download [the latest binary](https://github.com/vain0/GitEdit/releases/latest).

@@ -32,7 +32,10 @@
             Command="{Binding CompleteCommand}"
             CommandParameter="Default"
             />
-        <KeyBinding Gesture="Ctrl+Shift+W" Command="{Binding AbortCommand}" />
+        <KeyBinding
+            Gesture="Ctrl+Shift+Delete"
+            Command="{Binding AbortCommand}"
+            />
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -64,7 +67,11 @@
                 <StatusBarItem Content="{Binding EncodingName}" />
             </StatusBar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Abort" Command="{Binding AbortCommand}" ToolTip="Ctrl+Shift+W" />
+                <Button
+                    Content="Abort"
+                    Command="{Binding AbortCommand}"
+                    ToolTip="Ctrl+Shift+Delete"
+                    />
                 <Button
                     Content="Complete"
                     Command="{Binding CompleteCommand}"
