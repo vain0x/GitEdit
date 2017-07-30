@@ -9,7 +9,6 @@ namespace GitEdit.UI.Editors
 {
     public sealed class MyTextEditor
         : TextEditor
-        , ITextEditor
     {
         public event EventHandler FileNameChanged;
 
