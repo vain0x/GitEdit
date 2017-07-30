@@ -28,7 +28,7 @@
         <KeyBinding
             Gesture="Ctrl+W"
             Command="{Binding CompleteCommand}"
-            CommandParameter="{x:Static editors:EncodingType.Default}"
+            CommandParameter="{x:Static editors:EncodingType.Current}"
             />
         <KeyBinding
             Gesture="Ctrl+Shift+Delete"
@@ -82,7 +82,7 @@
                 <Button
                     Content="Complete"
                     Command="{Binding CompleteCommand}"
-                    CommandParameter="{x:Static editors:EncodingType.Default}"
+                    CommandParameter="{x:Static editors:EncodingType.Current}"
                     ToolTip="Ctrl+W"
                     >
                     <Button.ContextMenu>

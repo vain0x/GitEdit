@@ -34,7 +34,7 @@ namespace GitEdit.UI
                 case EncodingType.Utf8:
                     Editor.Encoding = new UTF8Encoding();
                     break;
-                case EncodingType.Default:
+                case EncodingType.Current:
                 default:
                     break;
             }
@@ -63,7 +63,7 @@ namespace GitEdit.UI
         public void ClearQuit()
         {
             Editor.Document.Text = "";
-            SaveQuit(EncodingType.Default);
+            SaveQuit(EncodingType.Current);
         }
 
         public MainWindowViewModel(ISaveFileChooser saveFileChooser)

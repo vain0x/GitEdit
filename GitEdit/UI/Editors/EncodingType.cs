@@ -8,7 +8,7 @@ namespace GitEdit.UI.Editors
 {
     public enum EncodingType
     {
-        Default = 0,
+        Current = 0,
         Utf8,
     }
 }
