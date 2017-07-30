@@ -51,9 +51,13 @@ namespace GitEdit.UI
         {
             InitializeComponent();
 
-            base.DataContext = new MainWindowViewModel(this);
+            var dataContext = new MainWindowViewModel(this);
+            base.DataContext = dataContext;
 
             Rect = Settings.Default.MainWindowRect;
+
+            dataContext.Editor.FileLoadRequested += (sender, e) => editor.LoadFile(e);
+            dataContext.Editor.FileSaveRequested += (sender, e) => editor.SaveFile(e);
 
             editor.Focus();
         }

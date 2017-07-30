@@ -13,6 +13,9 @@ namespace GitEdit.UI.Editors
     public sealed class TextEditorViewModel
         : BindableBase
     {
+        public event EventHandler<FileInfo> FileLoadRequested;
+        public event EventHandler<FileInfo> FileSaveRequested;
+
         readonly ITextEditor editor;
 
         IDocument document;
@@ -87,12 +90,12 @@ namespace GitEdit.UI.Editors
 
         public void LoadFile(FileInfo file)
         {
-            editor.LoadFile(file);
+            FileLoadRequested?.Invoke(this, file);
         }
 
         public void SaveFile(FileInfo file)
         {
-            editor.SaveFile(file);
+            FileSaveRequested?.Invoke(this, file);
         }
 
         public TextEditorViewModel(ITextEditor editor)
